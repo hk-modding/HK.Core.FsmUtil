@@ -530,6 +530,63 @@ namespace Core.FsmUtil
             return true;
         }
 
+        /// <summary>
+        ///     Removes all actions of a given type in a PlayMakerFSM.  
+        ///     Trying to remove an action that doesn't exist will result in the actions not being changed.
+        /// </summary>
+        /// <typeparam name="TAction">The type of actions to remove</typeparam>
+        /// <param name="fsm">The fsm</param>
+        public static void RemoveActionsOfType<TAction>(PlayMakerFSM fsm) => fsm.RemoveFsmActionsOfType<TAction>();
+
+        /// <inheritdoc cref="RemoveActionsOfType{TAction}(PlayMakerFSM)"/>
+        public static void RemoveFsmActionsOfType<TAction>(this PlayMakerFSM fsm)
+        {
+            FsmState[] origStates = fsm.FsmStates;
+            int origStatesCount = origStates.Length;
+            int i;
+            for (i = 0; i < origStatesCount; i++)
+            {
+                origStates[i].RemoveFsmActionsOfType<TAction>();
+            }
+        }
+
+        /// <inheritdoc cref="RemoveActionsOfType{TAction}(PlayMakerFSM)"/>
+        /// <summary>
+        ///     Removes all actions of a given type in an FsmState.  
+        /// </summary>
+        /// <param name="state">The fsm state</param>
+        public static void RemoveActionsOfType<TAction>(FsmState state) => state.RemoveFsmActionsOfType<TAction>();
+
+        /// <inheritdoc cref="RemoveActionsOfType{TAction}(FsmState)"/>
+        public static void RemoveFsmActionsOfType<TAction>(this FsmState state)
+        {
+            FsmStateAction[] origActions = state.Actions;
+            int origActionsCount = origActions.Length;
+            FsmStateAction[] newActions;
+            FsmStateAction tmpAction;
+            int i;
+            int amountOfRemoved = 0;
+            for (i = 0; i < origActionsCount; i++)
+            {
+                if (origActions[i] is TAction)
+                {
+                    amountOfRemoved++;
+                }
+            }
+            newActions = new FsmStateAction[origActionsCount - amountOfRemoved];
+            for (i = origActionsCount - 1; i >= 0; i--)
+            {
+                tmpAction = origActions[i];
+                if (tmpAction is TAction)
+                {
+                    amountOfRemoved--;
+                    continue;
+                }
+                newActions[i - amountOfRemoved] = tmpAction;
+            }
+            state.Actions = newActions;
+        }
+
         #endregion Remove
 
         #region FSM Variables
