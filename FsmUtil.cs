@@ -75,13 +75,66 @@ namespace Core.FsmUtil
         /// <param name="fsm">The fsm</param>
         /// <param name="stateName">The name of the state</param>
         /// <param name="index">The index of the action</param>
-        /// <returns>The action.</returns>
-        public static TAction GetAction<TAction>(PlayMakerFSM fsm, string stateName, int index) where TAction : FsmStateAction => fsm.GetFsmAction<TAction>(stateName, index);
+        /// <returns>The action, null if it can't be found.</returns>
+        public static TAction GetAction<TAction>(PlayMakerFSM fsm, string stateName, int index) where TAction : FsmStateAction => fsm.GetFsmState(stateName).GetFsmAction<TAction>(index);
 
         /// <inheritdoc cref="GetAction{TAction}(PlayMakerFSM, string, int)"/>
-        public static TAction GetFsmAction<TAction>(this PlayMakerFSM fsm, string stateName, int index) where TAction : FsmStateAction
+        public static TAction GetFsmAction<TAction>(this PlayMakerFSM fsm, string stateName, int index) where TAction : FsmStateAction => fsm.GetFsmState(stateName).GetFsmAction<TAction>(index);
+
+        /// <inheritdoc cref="GetAction{TAction}(PlayMakerFSM, string, int)"/>
+        /// <param name="state">The state</param>
+        /// <param name="index">The index of the action</param>
+        public static TAction GetAction<TAction>(FsmState state, int index) where TAction : FsmStateAction => state.GetFsmAction<TAction>(index);
+
+        /// <inheritdoc cref="GetAction{TAction}(FsmState, int)"/>
+        public static TAction GetFsmAction<TAction>(this FsmState state, int index) where TAction : FsmStateAction
         {
-            return (TAction) fsm.GetFsmState(stateName).Actions[index];
+            return state.Actions[index] as TAction;
+        }
+
+        /// <summary>
+        ///     Gets an action in a PlayMakerFSM.
+        /// </summary>
+        /// <typeparam name="TAction">The type of the action that is wanted</typeparam>
+        /// <param name="fsm">The fsm</param>
+        /// <param name="stateName">The name of the state</param>
+        /// <returns>An array of actions.</returns>
+        public static TAction[] GetActionOfType<TAction>(PlayMakerFSM fsm, string stateName) where TAction : FsmStateAction => fsm.GetFsmState(stateName).GetFsmActionOfType<TAction>();
+
+        /// <inheritdoc cref="GetActionOfType{TAction}(PlayMakerFSM, string)"/>
+        public static TAction[] GetFsmActionOfType<TAction>(this PlayMakerFSM fsm, string stateName) where TAction : FsmStateAction => fsm.GetFsmState(stateName).GetFsmActionOfType<TAction>();
+
+        /// <inheritdoc cref="GetActionOfType{TAction}(PlayMakerFSM, string)"/>
+        /// <param name="state">The state</param>
+        public static TAction[] GetActionOfType<TAction>(FsmState state) where TAction : FsmStateAction => state.GetFsmActionOfType<TAction>();
+
+        /// <inheritdoc cref="GetActionOfType{TAction}(FsmState)"/>
+        public static TAction[] GetFsmActionOfType<TAction>(this FsmState state) where TAction : FsmStateAction
+        {
+            FsmStateAction[] origActions = state.Actions;
+            int origActionsCount = origActions.Length;
+            int i;
+            int foundActions = 0;
+            for (i = 0; i < origActionsCount; i++)
+            {
+                if (origActions[i] is TAction)
+                {
+                    foundActions++;
+                }
+            }
+            TAction[] retActions = new TAction[foundActions];
+            FsmStateAction tmpAction;
+            int foundProgress = 0;
+            for (i = 0; foundProgress < foundActions; i++)
+            {
+                tmpAction = origActions[i];
+                if (tmpAction is TAction)
+                {
+                    retActions[foundProgress] = tmpAction as TAction;
+                    foundProgress++;
+                }
+            }
+            return retActions;
         }
 
         #endregion Get
@@ -486,6 +539,26 @@ namespace Core.FsmUtil
                 return true;
             }
             return false;
+        }
+
+        /// <summary>
+        ///     Removes all transitions from a state in a PlayMakerFSM.
+        /// </summary>
+        /// <param name="fsm">The fsm</param>
+        /// <param name="stateName">The name of the state from which the transition starts</param>
+        public static void RemoveTransitions(PlayMakerFSM fsm, string stateName) => fsm.GetFsmState(stateName).RemoveFsmTransitions();
+
+        /// <inheritdoc cref="RemoveTransitions(PlayMakerFSM, string)"/>
+        public static void RemoveFsmTransitions(this PlayMakerFSM fsm, string stateName) => fsm.GetFsmState(stateName).RemoveFsmTransitions();
+
+        /// <inheritdoc cref="RemoveTransitions(PlayMakerFSM, string)"/>
+        /// <param name="state">The fsm state</param>
+        public static void RemoveTransitions(FsmState state) => state.RemoveFsmTransitions();
+
+        /// <inheritdoc cref="RemoveTransitions(FsmState)"/>
+        public static void RemoveFsmTransitions(this FsmState state)
+        {
+            state.Transitions = new FsmTransition[0];
         }
 
         /// <summary>
