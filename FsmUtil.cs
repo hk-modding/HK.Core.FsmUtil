@@ -280,27 +280,34 @@ namespace Core.FsmUtil
         #region Insert
 
         /// <summary>
-        ///     Inserts an action in a PlayMakerFSM.
+        ///     Inserts an action in a PlayMakerFSM.  
+        ///     Trying to insert an action out of bounds will result in the actions not being changed
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="stateName">The name of the state in which the action is added</param>
         /// <param name="action">The action</param>
         /// <param name="index">The index to place the action in</param>
-        public static void InsertAction(PlayMakerFSM fsm, string stateName, FsmStateAction action, int index) => fsm.GetFsmState(stateName).InsertFsmAction(action, index);
+        /// <returns>bool that indicates wether the insertion was successfull</returns>
+        public static bool InsertAction(PlayMakerFSM fsm, string stateName, FsmStateAction action, int index) => fsm.GetFsmState(stateName).InsertFsmAction(action, index);
 
         /// <inheritdoc cref="InsertAction(PlayMakerFSM, string, FsmStateAction, int)"/>
-        public static void InsertFsmAction(this PlayMakerFSM fsm, string stateName, FsmStateAction action, int index) => fsm.GetFsmState(stateName).InsertFsmAction(action, index);
+        public static bool InsertFsmAction(this PlayMakerFSM fsm, string stateName, FsmStateAction action, int index) => fsm.GetFsmState(stateName).InsertFsmAction(action, index);
 
         /// <inheritdoc cref="InsertAction(PlayMakerFSM, string, FsmStateAction, int)"/>
         /// <param name="state">The fsm state</param>
         /// <param name="action">The action</param>
         /// <param name="index">The index to place the action in</param>
-        public static void InsertAction(FsmState state, FsmStateAction action, int index) => state.InsertFsmAction(action, index);
+        public static bool InsertAction(FsmState state, FsmStateAction action, int index) => state.InsertFsmAction(action, index);
 
         /// <inheritdoc cref="InsertAction(FsmState, FsmStateAction, int)"/>
-        public static void InsertFsmAction(this FsmState state, FsmStateAction action, int index)
+        public static bool InsertFsmAction(this FsmState state, FsmStateAction action, int index)
         {
             FsmStateAction[] origActions = state.Actions;
+            int origActionsCount = origActions.Length;
+            if (index < 0 || index > origActionsCount)
+            {
+                return false;
+            }
             FsmStateAction[] actions = new FsmStateAction[origActions.Length + 1];
             int i;
             for (i = 0; i < index; i++)
@@ -308,12 +315,13 @@ namespace Core.FsmUtil
                 actions[i] = origActions[i];
             }
             actions[index] = action;
-            for (i = index; i < origActions.Length; i++)
+            for (i = index; i < origActionsCount; i++)
             {
                 actions[i + 1] = origActions[i];
             }
 
             state.Actions = actions;
+            return true;
         }
 
         /// <summary>
@@ -323,22 +331,20 @@ namespace Core.FsmUtil
         /// <param name="stateName">The name of the state in which the method is added</param>
         /// <param name="method">The method that will be invoked</param>
         /// <param name="index">The index to place the action in</param>
-        public static void InsertMethod(PlayMakerFSM fsm, string stateName, Action method, int index) => fsm.GetFsmState(stateName).InsertFsmMethod(method, index);
+        /// <returns>bool that indicates wether the insertion was successfull</returns>
+        public static bool InsertMethod(PlayMakerFSM fsm, string stateName, Action method, int index) => fsm.GetFsmState(stateName).InsertFsmMethod(method, index);
 
         /// <inheritdoc cref="InsertMethod(PlayMakerFSM, string, Action, int)"/>
-        public static void InsertFsmMethod(this PlayMakerFSM fsm, string stateName, Action method, int index) => fsm.GetFsmState(stateName).InsertFsmMethod(method, index);
+        public static bool InsertFsmMethod(this PlayMakerFSM fsm, string stateName, Action method, int index) => fsm.GetFsmState(stateName).InsertFsmMethod(method, index);
 
         /// <inheritdoc cref="InsertMethod(PlayMakerFSM, string, Action, int)"/>
         /// <param name="state">The fsm state</param>
         /// <param name="method">The method that will be invoked</param>
         /// <param name="index">The index to place the action in</param>
-        public static void InsertMethod(FsmState state, Action method, int index) => state.InsertFsmMethod(method, index);
+        public static bool InsertMethod(FsmState state, Action method, int index) => state.InsertFsmMethod(method, index);
 
         /// <inheritdoc cref="InsertMethod(FsmState, Action, int)"/>
-        public static void InsertFsmMethod(this FsmState state, Action method, int index)
-        {
-            state.InsertFsmAction(new MethodAction() { method = method }, index);
-        }
+        public static bool InsertFsmMethod(this FsmState state, Action method, int index) => state.InsertFsmAction(new MethodAction() { method = method }, index);
 
         /// <summary>
         ///     Inserts a method with a parameter in a PlayMakerFSM.
@@ -349,23 +355,21 @@ namespace Core.FsmUtil
         /// <param name="method">The method that will be invoked</param>
         /// <param name="arg">The argument for the method</param>
         /// <param name="index">The index to place the action in</param>
-        public static void InsertMethod<TArg>(PlayMakerFSM fsm, string stateName, Action<TArg> method, TArg arg, int index) => fsm.GetFsmState(stateName).InsertFsmMethod<TArg>(method, arg, index);
+        /// <returns>bool that indicates wether the insertion was successfull</returns>
+        public static bool InsertMethod<TArg>(PlayMakerFSM fsm, string stateName, Action<TArg> method, TArg arg, int index) => fsm.GetFsmState(stateName).InsertFsmMethod<TArg>(method, arg, index);
 
         /// <inheritdoc cref="InsertMethod{TArg}(PlayMakerFSM, string, Action{TArg}, TArg, int)"/>
-        public static void InsertFsmMethod<TArg>(this PlayMakerFSM fsm, string stateName, Action<TArg> method, TArg arg, int index) => fsm.GetFsmState(stateName).InsertFsmMethod<TArg>(method, arg, index);
+        public static bool InsertFsmMethod<TArg>(this PlayMakerFSM fsm, string stateName, Action<TArg> method, TArg arg, int index) => fsm.GetFsmState(stateName).InsertFsmMethod<TArg>(method, arg, index);
 
         /// <inheritdoc cref="InsertMethod{TArg}(PlayMakerFSM, string, Action{TArg}, TArg, int)"/>
         /// <param name="state">The fsm state</param>
         /// <param name="method">The method that will be invoked</param>
         /// <param name="arg">The argument for the method</param>
         /// <param name="index">The index to place the action in</param>
-        public static void InsertMethod<TArg>(FsmState state, Action<TArg> method, TArg arg, int index) => state.InsertFsmMethod<TArg>(method, arg, index);
+        public static bool InsertMethod<TArg>(FsmState state, Action<TArg> method, TArg arg, int index) => state.InsertFsmMethod<TArg>(method, arg, index);
 
         /// <inheritdoc cref="InsertMethod{TArg}(FsmState, Action{TArg}, TArg, int)"/>
-        public static void InsertFsmMethod<TArg>(this FsmState state, Action<TArg> method, TArg arg, int index)
-        {
-            state.InsertFsmAction(new FunctionAction<TArg>() { method = method, arg = arg }, index);
-        }
+        public static bool InsertFsmMethod<TArg>(this FsmState state, Action<TArg> method, TArg arg, int index) => state.InsertFsmAction(new FunctionAction<TArg>() { method = method, arg = arg }, index);
 
         #endregion Insert
 
@@ -378,23 +382,29 @@ namespace Core.FsmUtil
         /// <param name="stateName">The name of the state from which the transition starts</param>
         /// <param name="eventName">The event of the transition</param>
         /// <param name="toState">The new endpoint of the transition</param>
-        public static void ChangeTransition(PlayMakerFSM fsm, string stateName, string eventName, string toState) => fsm.ChangeFsmTransition(stateName, eventName, toState);
+        /// <returns>bool that indicates wether the change was successfull</returns>
+        public static bool ChangeTransition(PlayMakerFSM fsm, string stateName, string eventName, string toState) => fsm.ChangeFsmTransition(stateName, eventName, toState);
 
         /// <inheritdoc cref="ChangeTransition(PlayMakerFSM, string, string, string)"/>
-        public static void ChangeFsmTransition(this PlayMakerFSM fsm, string stateName, string eventName, string toState) => fsm.GetFsmState(stateName).ChangeFsmTransition(eventName, toState);
+        public static bool ChangeFsmTransition(this PlayMakerFSM fsm, string stateName, string eventName, string toState) => fsm.GetFsmState(stateName).ChangeFsmTransition(eventName, toState);
 
         /// <inheritdoc cref="ChangeTransition(PlayMakerFSM, string, string, string)"/>
         /// <param name="state">The fsm state</param>
         /// <param name="eventName">The event of the transition</param>
         /// <param name="toState">The new endpoint of the transition</param>
-        public static void ChangeTransition(FsmState state, string eventName, string toState) => state.ChangeFsmTransition(eventName, toState);
+        public static bool ChangeTransition(FsmState state, string eventName, string toState) => state.ChangeFsmTransition(eventName, toState);
 
         /// <inheritdoc cref="ChangeTransition(FsmState, string, string)"/>
-        public static void ChangeFsmTransition(this FsmState state, string eventName, string toState)
+        public static bool ChangeFsmTransition(this FsmState state, string eventName, string toState)
         {
             var transition = state.GetFsmTransition(eventName);
+            if (transition == null)
+            {
+                return false;
+            }
             transition.ToState = toState;
             transition.ToFsmState = state.Fsm.GetState(toState);
+            return true;
         }
 
         #endregion Change
@@ -402,20 +412,23 @@ namespace Core.FsmUtil
         #region Remove
 
         /// <summary>
-        ///     Removes a state in a PlayMakerFSM.
+        ///     Removes a state in a PlayMakerFSM.  
+        ///     Trying to remove a state that doesn't exist will result in the states not being changed.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="stateName">The name of the state to remove</param>
-        public static void RemoveState(PlayMakerFSM fsm, string stateName) => fsm.RemoveFsmState(stateName);
+        /// <returns>bool that indicates wether the removing was successfull</returns>
+        public static bool RemoveState(PlayMakerFSM fsm, string stateName) => fsm.RemoveFsmState(stateName);
 
         /// <inheritdoc cref="RemoveState(PlayMakerFSM, string)"/>
-        public static void RemoveFsmState(this PlayMakerFSM fsm, string stateName)
+        public static bool RemoveFsmState(this PlayMakerFSM fsm, string stateName)
         {
             FsmState[] origStates = fsm.FsmStates;
             FsmState[] newStates = new FsmState[origStates.Length - 1];
+            int newStatesCount = newStates.Length;
             int i;
             int foundInt = 0;
-            for (i = 0; i < newStates.Length; i++)
+            for (i = 0; i < newStatesCount; i++)
             {
                 if (origStates[i].Name == stateName)
                 {
@@ -424,33 +437,41 @@ namespace Core.FsmUtil
                 newStates[i] = origStates[i + foundInt];
             }
 
-            fsm.Fsm.States = newStates;
+            if (foundInt == 1 || origStates[i].Name == stateName)
+            {
+                fsm.Fsm.States = newStates;
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
-        ///     Removes a transition in a PlayMakerFSM.
+        ///     Removes a transition in a PlayMakerFSM.  
+        ///     Trying to remove a transition that doesn't exist will result in the transitions not being changed.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="stateName">The name of the state from which the transition starts</param>
         /// <param name="eventName">The event of the transition</param>
-        public static void RemoveTransition(PlayMakerFSM fsm, string stateName, string eventName) => fsm.GetFsmState(stateName).RemoveFsmTransition(eventName);
+        /// <returns>bool that indicates wether the removing was successfull</returns>
+        public static bool RemoveTransition(PlayMakerFSM fsm, string stateName, string eventName) => fsm.GetFsmState(stateName).RemoveFsmTransition(eventName);
 
         /// <inheritdoc cref="RemoveTransition(PlayMakerFSM, string, string)"/>
-        public static void RemoveFsmTransition(this PlayMakerFSM fsm, string stateName, string eventName) => fsm.GetFsmState(stateName).RemoveFsmTransition(eventName);
+        public static bool RemoveFsmTransition(this PlayMakerFSM fsm, string stateName, string eventName) => fsm.GetFsmState(stateName).RemoveFsmTransition(eventName);
 
         /// <inheritdoc cref="RemoveTransition(PlayMakerFSM, string, string)"/>
         /// <param name="state">The fsm state</param>
         /// <param name="eventName">The event of the transition</param>
-        public static void RemoveTransition(FsmState state, string eventName) => state.RemoveFsmTransition(eventName);
+        public static bool RemoveTransition(FsmState state, string eventName) => state.RemoveFsmTransition(eventName);
 
         /// <inheritdoc cref="RemoveTransition(FsmState, string)"/>
-        public static void RemoveFsmTransition(this FsmState state, string eventName)
+        public static bool RemoveFsmTransition(this FsmState state, string eventName)
         {
             FsmTransition[] origTransitions = state.Transitions;
             FsmTransition[] newTransitions = new FsmTransition[origTransitions.Length - 1];
+            int newTransitionsCount = newTransitions.Length;
             int i;
             int foundInt = 0;
-            for (i = 0; i < newTransitions.Length; i++)
+            for (i = 0; i < newTransitionsCount; i++)
             {
                 if (origTransitions[i].EventName == eventName)
                 {
@@ -459,41 +480,54 @@ namespace Core.FsmUtil
                 newTransitions[i] = origTransitions[i + foundInt];
             }
 
-            state.Transitions = newTransitions;
+            if (foundInt == 1 || origTransitions[i].EventName == eventName)
+            {
+                state.Transitions = newTransitions;
+                return true;
+            }
+            return false;
         }
 
         /// <summary>
-        ///     Removes an action in a PlayMakerFSM.
+        ///     Removes an action in a PlayMakerFSM.  
+        ///     Trying to remove an action that doesn't exist will result in the actions not being changed.
         /// </summary>
         /// <param name="fsm">The fsm</param>
         /// <param name="stateName">The name of the state with the action</param>
         /// <param name="index">The index of the action</param>
-        public static void RemoveAction(PlayMakerFSM fsm, string stateName, int index) => fsm.GetFsmState(stateName).RemoveFsmAction(index);
+        /// <returns>bool that indicates wether the removing was successfull</returns>
+        public static bool RemoveAction(PlayMakerFSM fsm, string stateName, int index) => fsm.GetFsmState(stateName).RemoveFsmAction(index);
 
         /// <inheritdoc cref="RemoveAction(PlayMakerFSM, string, int)"/>
-        public static void RemoveFsmAction(this PlayMakerFSM fsm, string stateName, int index) => fsm.GetFsmState(stateName).RemoveFsmAction(index);
+        public static bool RemoveFsmAction(this PlayMakerFSM fsm, string stateName, int index) => fsm.GetFsmState(stateName).RemoveFsmAction(index);
 
         /// <inheritdoc cref="RemoveAction(PlayMakerFSM, string, int)"/>
         /// <param name="state">The fsm state</param>
         /// <param name="index">The index of the action</param>
-        public static void RemoveAction(FsmState state, int index) => state.RemoveFsmAction(index);
+        public static bool RemoveAction(FsmState state, int index) => state.RemoveFsmAction(index);
 
         /// <inheritdoc cref="RemoveAction(FsmState, int)"/>
-        public static void RemoveFsmAction(this FsmState state, int index)
+        public static bool RemoveFsmAction(this FsmState state, int index)
         {
             FsmStateAction[] origActions = state.Actions;
-            FsmStateAction[] actions = new FsmStateAction[origActions.Length - 1];
+            if (index < 0 || index >= origActions.Length)
+            {
+                return false;
+            }
+            FsmStateAction[] newActions = new FsmStateAction[origActions.Length - 1];
+            int newActionsCount = newActions.Length;
             int i;
             for (i = 0; i < index; i++)
             {
-                actions[i] = origActions[i];
+                newActions[i] = origActions[i];
             }
-            for (i = index; i < actions.Length; i++)
+            for (i = index; i < newActionsCount; i++)
             {
-                actions[i] = origActions[i + 1];
+                newActions[i] = origActions[i + 1];
             }
 
-            state.Actions = actions;
+            state.Actions = newActions;
+            return true;
         }
 
         #endregion Remove
