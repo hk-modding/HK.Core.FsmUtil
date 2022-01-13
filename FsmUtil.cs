@@ -542,6 +542,53 @@ namespace Core.FsmUtil
         }
 
         /// <summary>
+        ///     Removes a transition in a PlayMakerFSM.  
+        ///     Trying to remove a transition that doesn't exist will result in the transitions not being changed.
+        /// </summary>
+        /// <param name="fsm">The fsm</param>
+        /// <param name="stateName">The name of the state from which the transition starts</param>
+        /// <param name="toState">The target of the transition</param>
+        public static void RemoveTransitionsTo(PlayMakerFSM fsm, string stateName, string toState) => fsm.GetFsmState(stateName).RemoveFsmTransitionsTo(toState);
+
+        /// <inheritdoc cref="RemoveTransitionsTo(PlayMakerFSM, string, string)"/>
+        public static void RemoveFsmTransitionsTo(this PlayMakerFSM fsm, string stateName, string toState) => fsm.GetFsmState(stateName).RemoveFsmTransitionsTo(toState);
+
+        /// <inheritdoc cref="RemoveTransitionsTo(PlayMakerFSM, string, string)"/>
+        /// <param name="state">The fsm state</param>
+        /// <param name="toState">The event of the transition</param>
+        public static void RemoveTransitionsTo(FsmState state, string toState) => state.RemoveFsmTransitionsTo(toState);
+
+        /// <inheritdoc cref="RemoveTransitionsTo(FsmState, string)"/>
+        public static void RemoveFsmTransitionsTo(this FsmState state, string toState)
+        {
+            FsmTransition[] origTransitions = state.Transitions;
+            int origTransitionsCount = origTransitions.Length;
+            FsmTransition[] newTransitions;
+            FsmTransition tmpTransition;
+            int i;
+            int amountOfRemoved = 0;
+            for (i = 0; i < origTransitionsCount; i++)
+            {
+                if (origTransitions[i].ToState == toState)
+                {
+                    amountOfRemoved++;
+                }
+            }
+            newTransitions = new FsmTransition[origTransitions.Length - 1];
+            for (i = origTransitionsCount - 1; i >= 0; i--)
+            {
+                tmpTransition = origTransitions[i];
+                if (tmpTransition.ToState == toState)
+                {
+                    amountOfRemoved--;
+                    continue;
+                }
+                newTransitions[i - amountOfRemoved] = tmpTransition;
+            }
+            state.Transitions = newTransitions;
+        }
+
+        /// <summary>
         ///     Removes all transitions from a state in a PlayMakerFSM.
         /// </summary>
         /// <param name="fsm">The fsm</param>
