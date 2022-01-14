@@ -542,7 +542,27 @@ namespace Core.FsmUtil
         }
 
         /// <summary>
-        ///     Removes a transition in a PlayMakerFSM.  
+        ///     Removes all transitions to a specified transition in a PlayMakerFSM.  
+        ///     Trying to remove a transition that doesn't exist will result in the transitions not being changed.
+        /// </summary>
+        /// <param name="fsm">The fsm</param>
+        /// <param name="toState">The target of the transition</param>
+        public static void RemoveTransitionsTo(PlayMakerFSM fsm, string toState) => fsm.RemoveFsmTransitionsTo(toState);
+
+        /// <inheritdoc cref="RemoveTransitionsTo(PlayMakerFSM, string)"/>
+        public static void RemoveFsmTransitionsTo(this PlayMakerFSM fsm, string toState)
+        {
+            FsmState[] origStates = fsm.FsmStates;
+            int origStatesCount = origStates.Length;
+            int i;
+            for (i = 0; i < origStatesCount; i++)
+            {
+                origStates[i].RemoveFsmTransitionsTo(toState);
+            }
+        }
+
+        /// <summary>
+        ///     Removes all transitions from a state to another specified state in a PlayMakerFSM.  
         ///     Trying to remove a transition that doesn't exist will result in the transitions not being changed.
         /// </summary>
         /// <param name="fsm">The fsm</param>
@@ -651,8 +671,7 @@ namespace Core.FsmUtil
         }
 
         /// <summary>
-        ///     Removes all actions of a given type in a PlayMakerFSM.  
-        ///     Trying to remove an action that doesn't exist will result in the actions not being changed.
+        ///     Removes all actions of a given type in a PlayMakerFSM.
         /// </summary>
         /// <typeparam name="TAction">The type of actions to remove</typeparam>
         /// <param name="fsm">The fsm</param>
@@ -670,10 +689,19 @@ namespace Core.FsmUtil
             }
         }
 
-        /// <inheritdoc cref="RemoveActionsOfType{TAction}(PlayMakerFSM)"/>
+
         /// <summary>
         ///     Removes all actions of a given type in an FsmState.  
         /// </summary>
+        /// <typeparam name="TAction">The type of actions to remove</typeparam>
+        /// <param name="fsm">The fsm</param>
+        /// <param name="stateName">The name of the state to remove the actions from</param>
+        public static void RemoveActionsOfType<TAction>(PlayMakerFSM fsm, string stateName) => fsm.GetFsmState(stateName).RemoveFsmActionsOfType<TAction>();
+
+        /// <inheritdoc cref="RemoveActionsOfType{TAction}(PlayMakerFSM, string)"/>
+        public static void RemoveFsmActionsOfType<TAction>(this PlayMakerFSM fsm, string stateName) => fsm.GetFsmState(stateName).RemoveFsmActionsOfType<TAction>();
+
+        /// <inheritdoc cref="RemoveActionsOfType{TAction}(PlayMakerFSM, string)"/>
         /// <param name="state">The fsm state</param>
         public static void RemoveActionsOfType<TAction>(FsmState state) => state.RemoveFsmActionsOfType<TAction>();
 
