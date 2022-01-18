@@ -12,14 +12,14 @@ namespace Core.FsmUtil.Actions
         /// <summary>
         ///     The text to log.
         /// </summary>
-        public FsmString text;
+        public FsmString Text;
 
         /// <summary>
         ///     Resets the action.
         /// </summary>
         public override void Reset()
         {
-            text = string.Empty;
+            Text = string.Empty;
             base.Reset();
         }
 
@@ -28,11 +28,11 @@ namespace Core.FsmUtil.Actions
         /// </summary>
         public override void OnEnter()
         {
-            if (text.Value != null) Log($"FSM Log: \"{text.Value}\"");
+            if (Text.Value != null) Log($"FSM Log: \"{Text.Value}\"");
             Finish();
         }
 
-        private new void Log(string message)
+        private new static void Log(string message)
         {
             Logger.Log($"[Core]:[FsmUtil]:[LogAction] - {message}");
         }

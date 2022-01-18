@@ -1,4 +1,6 @@
-﻿namespace Core.FsmUtil
+﻿using Core.FsmUtil.delegates;
+
+namespace Core.FsmUtil
 {
     namespace delegates
     {
@@ -6,38 +8,38 @@
         ///     Hook that gets called before `PlayMakerFSM.Awake()` is called.  
         ///     In this hook, nothing in the FSM will be initialized yet.
         /// </summary>
-        public delegate void PMFsmBeforeAwake(PlayMakerFSM fsm);
+        public delegate void PmFsmBeforeAwake(PlayMakerFSM fsm);
 
         /// <summary>
         ///     Hook that gets called after `PlayMakerFSM.Awake()` is called.  
         ///     In this hook, the PlayMakerGlobals will be initialized as well as the FSM template, if present, and the FSM itself.
         /// </summary>
-        public delegate void PMFsmAfterAwake(PlayMakerFSM fsm);
+        public delegate void PmFsmAfterAwake(PlayMakerFSM fsm);
 
         /// <summary>
         ///     Hook that gets called before `PlayMakerFSM.Start()` is called.  
         ///     In this hook, the FSM didn't execute any state actions yet, nor is the current state set, if it didn't already start.  
         ///     This is likely the hook for editing FSMs that you want.
         /// </summary>
-        public delegate void PMFsmBeforeStart(PlayMakerFSM fsm);
+        public delegate void PmFsmBeforeStart(PlayMakerFSM fsm);
 
         /// <summary>
         ///     Hook that gets called after `PlayMakerFSM.Start()` is called.  
         ///     In this hook, the FSM switched to its first state and started executing it.
         /// </summary>
-        public delegate void PMFsmAfterStart(PlayMakerFSM fsm);
+        public delegate void PmFsmAfterStart(PlayMakerFSM fsm);
 
         /// <summary>
         ///     Hook that gets called before `PlayMakerFSM.OnEnable()` is called.  
         ///     In this hook, the FSM is not added to the static `fsmList` yet, nor did the FSM restart if the `RestartOnEnable` flag is set.
         /// </summary>
-        public delegate void PMFsmBeforeOnEnable(PlayMakerFSM fsm);
+        public delegate void PmFsmBeforeOnEnable(PlayMakerFSM fsm);
 
         /// <summary>
         ///     Hook that gets called after `PlayMakerFSM.OnEnable()` is called.  
         ///     In this hook, the FSM is added to the static `fsmList` and restarted if the `RestartOnEnable` flag is set.
         /// </summary>
-        public delegate void PMFsmAfterOnEnable(PlayMakerFSM fsm);
+        public delegate void PmFsmAfterOnEnable(PlayMakerFSM fsm);
     }
 
     /// <summary>
@@ -48,52 +50,52 @@
         /// <summary>
         ///     Hook that gets called before `PlayMakerFSM.Awake()` is called.
         /// </summary>
-        /// <see cref="delegates.PMFsmBeforeAwake"/>
+        /// <see cref="PmFsmBeforeAwake"/>
         /// <remarks>N/A</remarks>
-        public static event delegates.PMFsmBeforeAwake PMFsmBeforeAwakeHook;
+        public static event PmFsmBeforeAwake PmFsmBeforeAwakeHook;
 
         /// <summary>
         ///     Hook that gets called after `PlayMakerFSM.Awake()` is called.
         /// </summary>
-        /// <see cref="delegates.PMFsmAfterAwake"/>
+        /// <see cref="PmFsmAfterAwake"/>
         /// <remarks>N/A</remarks>
-        public static event delegates.PMFsmAfterAwake PMFsmAfterAwakeHook;
+        public static event PmFsmAfterAwake PmFsmAfterAwakeHook;
 
         /// <summary>
         ///     Hook that gets called before `PlayMakerFSM.Start()` is called.
         /// </summary>
-        /// <see cref="delegates.PMFsmBeforeStart"/>
+        /// <see cref="PmFsmBeforeStart"/>
         /// <remarks>N/A</remarks>
-        public static event delegates.PMFsmBeforeStart PMFsmBeforeStartHook;
+        public static event PmFsmBeforeStart PmFsmBeforeStartHook;
 
         /// <summary>
         ///     Hook that gets called after `PlayMakerFSM.Start()` is called.
         /// </summary>
-        /// <see cref="delegates.PMFsmAfterStart"/>
+        /// <see cref="PmFsmAfterStart"/>
         /// <remarks>N/A</remarks>
-        public static event delegates.PMFsmAfterStart PMFsmAfterStartHook;
+        public static event PmFsmAfterStart PmFsmAfterStartHook;
 
         /// <summary>
         ///     Hook that gets called before `PlayMakerFSM.OnEnable()` is called.
         /// </summary>
-        /// <see cref="delegates.PMFsmBeforeOnEnable"/>
+        /// <see cref="PmFsmBeforeOnEnable"/>
         /// <remarks>N/A</remarks>
-        public static event delegates.PMFsmBeforeOnEnable PMFsmBeforeOnEnableHook;
+        public static event PmFsmBeforeOnEnable PmFsmBeforeOnEnableHook;
 
         /// <summary>
         ///     Hook that gets called after `PlayMakerFSM.OnEnable()` is called.
         /// </summary>
-        /// <see cref="delegates.PMFsmAfterOnEnable"/>
+        /// <see cref="PmFsmAfterOnEnable"/>
         /// <remarks>N/A</remarks>
-        public static event delegates.PMFsmAfterOnEnable PMFsmAfterOnEnableHook;
+        public static event PmFsmAfterOnEnable PmFsmAfterOnEnableHook;
 
         static Hooks()
         {
             On.PlayMakerFSM.Awake += (orig, self) =>
             {
-                if (PMFsmBeforeAwakeHook != null)
+                if (PmFsmBeforeAwakeHook != null)
                 {
-                    delegates.PMFsmBeforeAwake[] delegates = PMFsmBeforeAwakeHook.GetInvocationList() as delegates.PMFsmBeforeAwake[];
+                    PmFsmBeforeAwake[] delegates = PmFsmBeforeAwakeHook.GetInvocationList() as PmFsmBeforeAwake[];
                     int delegatesCount = delegates.Length;
                     int i;
                     for (i = 0; i < delegatesCount; i++)
@@ -102,9 +104,9 @@
                     }
                 }
                 orig(self);
-                if (PMFsmAfterAwakeHook != null)
+                if (PmFsmAfterAwakeHook != null)
                 {
-                    delegates.PMFsmAfterAwake[] delegates = PMFsmAfterAwakeHook.GetInvocationList() as delegates.PMFsmAfterAwake[];
+                    PmFsmAfterAwake[] delegates = PmFsmAfterAwakeHook.GetInvocationList() as PmFsmAfterAwake[];
                     int delegatesCount = delegates.Length;
                     int i;
                     for (i = 0; i < delegatesCount; i++)
@@ -115,9 +117,9 @@
             };
             On.PlayMakerFSM.Start += (orig, self) =>
             {
-                if (PMFsmBeforeStartHook != null)
+                if (PmFsmBeforeStartHook != null)
                 {
-                    delegates.PMFsmBeforeStart[] delegates = PMFsmBeforeStartHook.GetInvocationList() as delegates.PMFsmBeforeStart[];
+                    PmFsmBeforeStart[] delegates = PmFsmBeforeStartHook.GetInvocationList() as PmFsmBeforeStart[];
                     int delegatesCount = delegates.Length;
                     int i;
                     for (i = 0; i < delegatesCount; i++)
@@ -126,9 +128,9 @@
                     }
                 }
                 orig(self);
-                if (PMFsmAfterStartHook != null)
+                if (PmFsmAfterStartHook != null)
                 {
-                    delegates.PMFsmAfterStart[] delegates = PMFsmAfterStartHook.GetInvocationList() as delegates.PMFsmAfterStart[];
+                    PmFsmAfterStart[] delegates = PmFsmAfterStartHook.GetInvocationList() as PmFsmAfterStart[];
                     int delegatesCount = delegates.Length;
                     int i;
                     for (i = 0; i < delegatesCount; i++)
@@ -139,9 +141,9 @@
             };
             On.PlayMakerFSM.OnEnable += (orig, self) =>
             {
-                if (PMFsmBeforeOnEnableHook != null)
+                if (PmFsmBeforeOnEnableHook != null)
                 {
-                    delegates.PMFsmBeforeOnEnable[] delegates = PMFsmBeforeOnEnableHook.GetInvocationList() as delegates.PMFsmBeforeOnEnable[];
+                    PmFsmBeforeOnEnable[] delegates = PmFsmBeforeOnEnableHook.GetInvocationList() as PmFsmBeforeOnEnable[];
                     int delegatesCount = delegates.Length;
                     int i;
                     for (i = 0; i < delegatesCount; i++)
@@ -150,9 +152,9 @@
                     }
                 }
                 orig(self);
-                if (PMFsmAfterOnEnableHook != null)
+                if (PmFsmAfterOnEnableHook != null)
                 {
-                    delegates.PMFsmAfterOnEnable[] delegates = PMFsmAfterOnEnableHook.GetInvocationList() as delegates.PMFsmAfterOnEnable[];
+                    PmFsmAfterOnEnable[] delegates = PmFsmAfterOnEnableHook.GetInvocationList() as PmFsmAfterOnEnable[];
                     int delegatesCount = delegates.Length;
                     int i;
                     for (i = 0; i < delegatesCount; i++)

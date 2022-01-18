@@ -1,5 +1,5 @@
-﻿using HutongGames.PlayMaker;
-using System;
+﻿using System;
+using HutongGames.PlayMaker;
 
 namespace Core.FsmUtil.Actions
 {
@@ -11,14 +11,14 @@ namespace Core.FsmUtil.Actions
         /// <summary>
         ///     The method to invoke.
         /// </summary>
-        public Action method;
+        public Action Method;
 
         /// <summary>
         ///     Resets the action.
         /// </summary>
         public override void Reset()
         {
-            method = null;
+            Method = null;
             base.Reset();
         }
 
@@ -27,7 +27,7 @@ namespace Core.FsmUtil.Actions
         /// </summary>
         public override void OnEnter()
         {
-            if (method != null) method.Invoke();
+            Method?.Invoke();
             Finish();
         }
     }

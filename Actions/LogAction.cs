@@ -1,5 +1,4 @@
-﻿using HutongGames.PlayMaker;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Core.FsmUtil.Actions
 {
@@ -15,7 +14,7 @@ namespace Core.FsmUtil.Actions
         /// </summary>
         public override void OnEnter()
         {
-            if (text.Value != null) Log($"{text.Value}");
+            if (Text.Value != null) Log($"{Text.Value}");
             Finish();
         }
 
