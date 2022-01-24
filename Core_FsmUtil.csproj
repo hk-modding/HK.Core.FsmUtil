@@ -1,12 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
     <RootNamespace>Core.FsmUtil</RootNamespace>
     <AssemblyName>Core_FsmUtil</AssemblyName>
-    <TargetFramework>net472</TargetFramework>
     <AssemblyTitle>Core_FsmUtil</AssemblyTitle>
     <Product>Core_FsmUtil</Product>
     <Description>A Hollow Knight Mod</Description>
-    <Copyright>Copyright © SFGrenade 2019-2021</Copyright>
+    <Copyright>Copyright © HK Modding 2021-2022</Copyright>
     <AssemblyVersion>1.0.0.0</AssemblyVersion>
     <FileVersion>1.0.0.0</FileVersion>
     <OutputPath>bin\$(Configuration)\</OutputPath>
