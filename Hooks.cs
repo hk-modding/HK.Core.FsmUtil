@@ -93,7 +93,7 @@ namespace Core.FsmUtil
                 catch (Exception ex)
                 {
                     logger.LogError(ex);
-                    int_Logger.Log(ex.ToString());
+                    Core.FsmUtil.Logger.Log(ex.ToString());
                 }
             }
         }
