@@ -27,7 +27,7 @@ namespace Core.FsmUtil.Actions
                 path = $"{t.gameObject.name}/{path}";
                 t = t.parent;
             }
-            Logger.Log($"[{path}]:[{Fsm.Name}]:[{State.Name}] - {message}");
+            InternalLogger.Log($"[{path}]:[{Fsm.Name}]:[{State.Name}] - {message}");
         }
     }
 }

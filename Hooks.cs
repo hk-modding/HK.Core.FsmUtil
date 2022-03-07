@@ -90,7 +90,7 @@ namespace Core.FsmUtil
                 }
                 catch (Exception ex)
                 {
-                    Logger.LogError($"[Core][FsmUtil][Hooks] - {ex}");
+                    InternalLogger.LogError($"[Core][FsmUtil][Hooks] - {ex}");
                 }
             }
         }

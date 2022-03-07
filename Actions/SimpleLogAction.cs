@@ -34,7 +34,7 @@ namespace Core.FsmUtil.Actions
 
         private new static void Log(string message)
         {
-            Logger.Log($"[Core]:[FsmUtil]:[LogAction] - {message}");
+            InternalLogger.Log($"[Core]:[FsmUtil]:[LogAction] - {message}");
         }
     }
 }
