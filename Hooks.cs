@@ -15,8 +15,6 @@ namespace Core.FsmUtil
     /// </summary>
     public static class Hooks
     {
-        private static Modding.ILogger logger = new Modding.SimpleLogger("Core.FsmUtil.Hooks");
-
         private static FsmModificationHandler _pmFsmBeforeStartHook;
         private static void InvokeBeforeStartHook(On.PlayMakerFSM.orig_Start orig, PlayMakerFSM self)
         {
@@ -92,8 +90,7 @@ namespace Core.FsmUtil
                 }
                 catch (Exception ex)
                 {
-                    logger.LogError(ex);
-                    Core.FsmUtil.Logger.Log(ex.ToString());
+                    Logger.LogError($"[Core][FsmUtil][Hooks] - {ex}");
                 }
             }
         }

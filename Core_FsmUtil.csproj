@@ -42,6 +42,9 @@
     <WriteLinesToFile File="$(ExportDir)/$(TargetName)/SHA.txt" Lines="$(OutputFileString);@(FilesWithHashes->'%(FileHash)');$(OutputZipString);@(ZipFilesWithHashes->'%(FileHash)')" Overwrite="true" Encoding="UTF-8" />
   </Target>
   <ItemGroup>
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(HollowKnightRefs)/Assembly-CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="MMHOOK_PlayMaker">
       <HintPath>$(HollowKnightRefs)/MMHOOK_PlayMaker.dll</HintPath>
     </Reference>
