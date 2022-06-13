@@ -16,8 +16,8 @@ public static class FsmUtil
     /// <summary>
     ///     Locates a PlayMakerFSM by name and preprocesses it.
     /// </summary>
-    /// <param name="go"></param>
-    /// <param name="fsmName"></param>
+    /// <param name="go">The GameObject to search on</param>
+    /// <param name="fsmName">The name of the FSM</param>
     /// <returns>The found FSM, null if not found</returns>
     [PublicAPI]
     private static PlayMakerFSM GetFsmPreprocessed(this GameObject go, string fsmName)
