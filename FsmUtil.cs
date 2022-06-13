@@ -2,6 +2,7 @@
 using Core.FsmUtil.Actions;
 using HutongGames.PlayMaker;
 using JetBrains.Annotations;
+using UnityEngine;
 
 namespace Core.FsmUtil;
 
@@ -10,6 +11,35 @@ namespace Core.FsmUtil;
 /// </summary>
 public static class FsmUtil
 {
+    #region Get a FSM
+
+    /// <summary>
+    ///     Locates a PlayMakerFSM by name and preprocesses it.
+    /// </summary>
+    /// <param name="go"></param>
+    /// <param name="fsmName"></param>
+    /// <returns>The found FSM, null if not found</returns>
+    [PublicAPI]
+    private static PlayMakerFSM GetFsmPreprocessed(this GameObject go, string fsmName)
+    {
+        PlayMakerFSM[] goFsmArr = go.GetComponents<PlayMakerFSM>();
+        int goFsmArrCount = goFsmArr.Length;
+        int fsmNameCount = fsmName.Length;
+        int i;
+        for (i = 0; i < goFsmArrCount; i++)
+        {
+            // length check first because unity's framework472 is trash and doesn't do it itself
+            if (goFsmArr[i].FsmName.Length == fsmNameCount && goFsmArr[i].FsmName == fsmName)
+            {
+                goFsmArr[i].Preprocess();
+                return goFsmArr[i];
+            }
+        }
+        return null;
+    }
+
+    #endregion
+    
     #region Get
 
     private static TVal GetItemFromArray<TVal>(TVal[] origArray, Func<TVal, bool> isItemCheck) where TVal : class
