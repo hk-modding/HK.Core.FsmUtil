@@ -798,6 +798,98 @@ public static class FsmUtil
 
     #endregion Remove
 
+    #region Disable
+    /// <summary>
+    ///     Disables an action in a PlayMakerFSM.  
+    ///     Trying to disable an action that doesn't exist will result in the actions not being changed.
+    /// </summary>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the state with the action</param>
+    /// <param name="index">The index of the action</param>
+    [PublicAPI]
+    public static bool DisableAction(PlayMakerFSM fsm, string stateName, int index) => fsm.GetFsmState(stateName).DisableFsmAction(index);
+
+    /// <inheritdoc cref="DisableAction(PlayMakerFSM, string, int)"/>
+    [PublicAPI]
+    public static bool DisableFsmAction(this PlayMakerFSM fsm, string stateName, int index) => fsm.GetFsmState(stateName).DisableFsmAction(index);
+
+    /// <inheritdoc cref="DisableAction(PlayMakerFSM, string, int)"/>
+    /// <param name="state">The fsm state</param>
+    /// <param name="index">The index of the action</param>
+    [PublicAPI]
+    public static bool DisableAction(FsmState state, int index) => state.DisableFsmAction(index);
+
+    /// <inheritdoc cref="DisableAction(FsmState, int)"/>
+    [PublicAPI]
+    public static bool DisableFsmAction(this FsmState state, int index)
+    {
+        FsmStateAction[] origActions = state.Actions;
+        if (index < 0 || index >= origActions.Length)
+        {
+            return false;
+        }
+        origActions[index].Enabled = false;
+        return true;
+    }
+
+    /// <summary>
+    ///     Disables all actions of a given type in a PlayMakerFSM.
+    /// </summary>
+    /// <typeparam name="TAction">The type of actions to disable</typeparam>
+    /// <param name="fsm">The fsm</param>
+    [PublicAPI]
+    public static void DisableActionsOfType<TAction>(PlayMakerFSM fsm) => fsm.DisableFsmActionsOfType<TAction>();
+
+    /// <inheritdoc cref="DisableActionsOfType{TAction}(PlayMakerFSM)"/>
+    [PublicAPI]
+    public static void DisableFsmActionsOfType<TAction>(this PlayMakerFSM fsm)
+    {
+        FsmState[] origStates = fsm.FsmStates;
+        int origStatesCount = origStates.Length;
+        int i;
+        for (i = 0; i < origStatesCount; i++)
+        {
+            origStates[i].DisableFsmActionsOfType<TAction>();
+        }
+    }
+
+
+    /// <summary>
+    ///     Disables all actions of a given type in an FsmState.  
+    /// </summary>
+    /// <typeparam name="TAction">The type of actions to disable</typeparam>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the state to disable the actions from</param>
+    [PublicAPI]
+    public static void DisableActionsOfType<TAction>(PlayMakerFSM fsm, string stateName) => fsm.GetFsmState(stateName).DisableFsmActionsOfType<TAction>();
+
+    /// <inheritdoc cref="DisableActionsOfType{TAction}(PlayMakerFSM, string)"/>
+    [PublicAPI]
+    public static void DisableFsmActionsOfType<TAction>(this PlayMakerFSM fsm, string stateName) => fsm.GetFsmState(stateName).DisableFsmActionsOfType<TAction>();
+
+    /// <inheritdoc cref="DisableActionsOfType{TAction}(PlayMakerFSM, string)"/>
+    /// <param name="state">The fsm state</param>
+    [PublicAPI]
+    public static void DisableActionsOfType<TAction>(FsmState state) => state.DisableFsmActionsOfType<TAction>();
+
+    /// <inheritdoc cref="DisableActionsOfType{TAction}(FsmState)"/>
+    [PublicAPI]
+    public static void DisableFsmActionsOfType<TAction>(this FsmState state)
+    {
+        FsmStateAction[] origArray = state.Actions;
+        int origArrayCount = origArray.Length;
+        int i;
+        for (i = 0; i < origArrayCount; i++)
+        {
+            if (origArray[i] is TAction)
+            {
+                origArray[i].Enabled = false;
+            }
+        }
+    }
+
+    #endregion Disable
+
     #region FSM Variables
 
     private static TVar[] MakeNewVariableArray<TVar>(TVar[] orig, string name) where TVar : NamedVariable, new()
