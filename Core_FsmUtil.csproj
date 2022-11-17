@@ -12,8 +12,8 @@
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <LangVersion>latest</LangVersion>
     <NoWarn>8002</NoWarn>
-    <HollowKnightRefs>E:/GOG/Hollow Knight 1.5 Modded/Hollow Knight_Data/Managed/</HollowKnightRefs>
-    <ExportDir>E:/Github_Projects/__Exports_Core/</ExportDir>
+    <HollowKnightRefs>C:/Program Files (x86)/Steam/steamapps/common/Hollow Knight/hollow_knight_Data/Managed/</HollowKnightRefs>
+    <ExportDir>$(HollowKnightRefs)/Mods/</ExportDir>
     <DocumentationFile>$(TargetDir)/$(AssemblyTitle).xml</DocumentationFile>
   </PropertyGroup>
   <Target Name="CopyMod" AfterTargets="PostBuildEvent">
@@ -74,6 +74,9 @@
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>$(HollowKnightRefs)/UnityEngine.CoreModule.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoMod.RuntimeDetour">
+      <HintPath>$(HollowKnightRefs)/MonoMod.RuntimeDetour.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
