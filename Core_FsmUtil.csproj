@@ -12,9 +12,12 @@
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <LangVersion>latest</LangVersion>
     <NoWarn>8002</NoWarn>
-    <HollowKnightRefs>C:\Program Files (x86)\Steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed\</HollowKnightRefs>
-    <ExportDir>Output\</ExportDir>
+    <HollowKnightRefs Condition="'$(HollowKnightRefs)' == '' and Exists('E:/GOG/Hollow Knight 1.5 Modded/Hollow Knight_Data/Managed/')">E:/GOG/Hollow Knight 1.5 Modded/Hollow Knight_Data/Managed/</HollowKnightRefs>
+    <HollowKnightRefs Condition="'$(HollowKnightRefs)' == '' and Exists('C:\Program Files (x86)\Steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed\')">C:\Program Files (x86)\Steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed\</HollowKnightRefs>
+    <ExportDir Condition="'$(ExportDir)' == '' and Exists('E:/Github_Projects/__Exports_Core/')">E:/Github_Projects/__Exports_Core/</ExportDir>
+    <ExportDir Condition="'$(ExportDir)' == '' and Exists('Output\')">Output\</ExportDir>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
+    <!--<DocumentationFile>$(TargetDir)/$(AssemblyTitle).xml</DocumentationFile> this should just work tbh, idk why it may not -->
   </PropertyGroup>
   <Target Name="CopyMod" AfterTargets="PostBuildEvent">
     <RemoveDir Directories="$(ExportDir)/$(TargetName)/" />
