@@ -344,6 +344,7 @@ public static class FsmUtil
     {
         FsmStateAction[] actions = AddItemToArray(state.Actions, action);
         state.Actions = actions;
+        action.Init(state);
     }
 
     /// <summary>
@@ -455,6 +456,7 @@ public static class FsmUtil
     {
         FsmStateAction[] actions = InsertItemIntoArray(state.Actions, action, index);
         state.Actions = actions;
+        action.Init(state);
     }
 
     /// <summary>
