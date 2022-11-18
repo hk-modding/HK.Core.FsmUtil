@@ -518,6 +518,72 @@ public static class FsmUtil
 
     #endregion Insert
 
+    #region Replace
+    
+    /// <summary>
+    ///     Replaces an action in a PlayMakerFSM.
+    /// </summary>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the state in which the action is replaced</param>
+    /// <param name="action">The action</param>
+    /// <param name="index">The index of the action</param>
+    [PublicAPI]
+    public static void ReplaceAction(PlayMakerFSM fsm, string stateName, FsmStateAction action, int index) => fsm.GetFsmState(stateName).ReplaceFsmAction(action, index);
+
+    /// <inheritdoc cref="ReplaceAction(PlayMakerFSM, string, FsmStateAction, int)"/>
+    [PublicAPI]
+    public static void ReplaceFsmAction(this PlayMakerFSM fsm, string stateName, FsmStateAction action, int index) => fsm.GetFsmState(stateName).ReplaceFsmAction(action, index);
+
+    /// <summary>
+    ///     Replaces an action in a PlayMakerFSM state.
+    /// </summary>
+    /// <param name="state">The state in which the action is replaced</param>
+    /// <param name="action">The action</param>
+    /// <param name="index">The index of the action</param>
+    [PublicAPI]
+    public static void ReplaceAction(FsmState state, FsmStateAction action, int index) => state.ReplaceFsmAction(action, index);
+
+    /// <inheritdoc cref="ReplaceAction(FsmState, FsmStateAction, int)"/>
+    [PublicAPI]
+    public static void ReplaceFsmAction(this FsmState state, FsmStateAction action, int index)
+    {
+        state.Actions[index] = action;
+        action.Init(state);
+    }
+
+    /// <summary>
+    ///     Replaces all actions in a PlayMakerFSM state.
+    /// </summary>
+    /// <param name="fsm">The fsm</param>
+    /// <param name="stateName">The name of the state in which the actions are to be replaced</param>
+    /// <param name="actions">The new actions of the state</param>
+    [PublicAPI] public static void ReplaceAllActions(PlayMakerFSM fsm, string stateName, params FsmStateAction[] actions) => fsm.GetFsmState(stateName).ReplaceAllFsmActions(actions);
+
+    /// <inheritdoc cref="ReplaceAllActions(PlayMakerFSM, string, FsmStateAction[])"/>
+    [PublicAPI]
+    public static void ReplaceAllFsmActions(this PlayMakerFSM fsm, string stateName, params FsmStateAction[] actions) => fsm.GetFsmState(stateName).ReplaceAllFsmActions(actions);
+
+    /// <summary>
+    ///     Replaces all actions in a PlayMakerFSM state.
+    /// </summary>
+    /// <param name="state">The fsm state</param>
+    /// <param name="actions">The action</param>
+    [PublicAPI]
+    public static void ReplaceAllActions(FsmState state, params FsmStateAction[] actions) => state.ReplaceAllFsmActions(actions);
+
+    /// <inheritdoc cref="ReplaceAllActions(FsmState, FsmStateAction[])"/>
+    [PublicAPI]
+    public static void ReplaceAllFsmActions(this FsmState state, params FsmStateAction[] actions)
+    {
+        state.Actions = actions;
+        for (int i = 0; i < actions.Length; i++)
+        {
+            actions[i].Init(state);
+        }
+    }
+
+    #endregion Replace
+
     #region Change
 
     /// <summary>
