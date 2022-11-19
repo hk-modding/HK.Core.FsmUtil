@@ -103,7 +103,9 @@ public static class FsmUtil
     [PublicAPI]
     public static FsmState GetFsmState(this PlayMakerFSM fsm, string stateName)
     {
-        return GetItemFromArray(fsm.FsmStates, x => x.Name == stateName);
+        int fsmNameCount = fsmName.Length;
+        // length check first because unity's framework472 is trash and doesn't do it itself
+        return GetItemFromArray(fsm.FsmStates, x => x.Name.Length == fsmNameCount && x.Name == stateName);
     }
 
     /// <summary>
@@ -130,7 +132,9 @@ public static class FsmUtil
     [PublicAPI]
     public static FsmTransition GetFsmTransition(this FsmState state, string eventName)
     {
-        return GetItemFromArray(state.Transitions, x => x.EventName == eventName);
+        int eventNameCount = eventName.Length;
+        // length check first because unity's framework472 is trash and doesn't do it itself
+        return GetItemFromArray(state.Transitions, x => x.EventName.Length == eventNameCount && x.EventName == eventName);
     }
 
     /// <summary>
@@ -576,7 +580,8 @@ public static class FsmUtil
     public static void ReplaceAllFsmActions(this FsmState state, params FsmStateAction[] actions)
     {
         state.Actions = actions;
-        for (int i = 0; i < actions.Length; i++)
+        int i;
+        for (i = 0; i < actions.Length; i++)
         {
             actions[i].Init(state);
         }
@@ -669,7 +674,9 @@ public static class FsmUtil
     [PublicAPI]
     public static void RemoveFsmState(this PlayMakerFSM fsm, string stateName)
     {
-        fsm.Fsm.States = RemoveItemsFromArray(fsm.FsmStates, x => x.Name == stateName);
+        int stateNameCount = stateName.Length;
+        // length check first because unity's framework472 is trash and doesn't do it itself
+        fsm.Fsm.States = RemoveItemsFromArray(fsm.FsmStates, x => x.Name.Length == stateNameCount && x.Name == stateName);
     }
 
     /// <summary>
@@ -696,7 +703,9 @@ public static class FsmUtil
     [PublicAPI]
     public static void RemoveFsmTransition(this FsmState state, string eventName)
     {
-        state.Transitions = RemoveItemsFromArray(state.Transitions, x => x.EventName == eventName);
+        int eventNameCount = eventName.Length;
+        // length check first because unity's framework472 is trash and doesn't do it itself
+        state.Transitions = RemoveItemsFromArray(state.Transitions, x => x.EventName.Length == eventNameCount && x.EventName == eventName);
     }
 
     /// <summary>
@@ -745,7 +754,9 @@ public static class FsmUtil
     [PublicAPI]
     public static void RemoveFsmTransitionsTo(this FsmState state, string toState)
     {
-        state.Transitions = RemoveItemsFromArray(state.Transitions, x => x.ToState == toState);
+        int toStateCount = toState.Length;
+        // length check first because unity's framework472 is trash and doesn't do it itself
+        state.Transitions = RemoveItemsFromArray(state.Transitions, x => x.ToState.Length == toStateCount && x.ToState == toState);
     }
 
     /// <summary>
@@ -1105,10 +1116,12 @@ public static class FsmUtil
     private static TVar FindInVariableArray<TVar>(TVar[] orig, string name) where TVar : NamedVariable, new()
     {
         int count = orig.Length;
+        int nameLength = name.Length;
         int i;
         for (i = 0; i < count; i++)
         {
-            if (orig[i].Name == name)
+            // length check first because unity's framework472 is trash and doesn't do it itself
+            if (orig[i].Name.Length == nameLength && orig[i].Name == name)
             {
                 return orig[i];
             }
@@ -1357,9 +1370,11 @@ public static class FsmUtil
     [PublicAPI]
     public static void MakeLog(this PlayMakerFSM fsm, bool additionalLogging = false)
     {
+        int i;
+        int j;
         foreach (var s in fsm.FsmStates)
         {
-            for (int i = s.Actions.Length - 1; i >= 0; i--)
+            for (i = s.Actions.Length - 1; i >= 0; i--)
             {
                 fsm.InsertFsmAction(s.Name, new LogAction { Text = $"{i}" }, i);
                 if (additionalLogging)
@@ -1377,7 +1392,6 @@ public static class FsmUtil
                         var origRectVariables = fsmVars.RectVariables;
                         var origQuaternionVariables = fsmVars.QuaternionVariables;
                         var origGameObjectVariables = fsmVars.GameObjectVariables;
-                        int j;
                         for (j = 0; j < origFloatVariables.Length; j++)
                             InternalLogger.Log($"[{fsm.gameObject.name}]:[{fsm.FsmName}]:[FloatVariables] - '{origFloatVariables[j].Name}': '{origFloatVariables[j].Value}'");
                         for (j = 0; j < origIntVariables.Length; j++)
