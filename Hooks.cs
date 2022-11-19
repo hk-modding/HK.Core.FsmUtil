@@ -224,6 +224,39 @@ namespace Core.FsmUtil
             }
         }
 
+        /// <summary>
+        /// Creates a hook that gets called when a state is entered by any means (a transition, a global transition, or from Fsm.SetState)
+        /// </summary>
+        /// <param name="data">The data necessary to find the fsm to be edited</param>
+        /// <param name="onStateEnter">The action that will be invoked when the state is entered, the parameter passed into the action is the fsm</param>
+        /// <returns>Handle of the hook</returns>
+        public static FSMHookHandle<Action<PlayMakerFSM>> CreateStateEnteredHook(FSMData data, Action<PlayMakerFSM> onStateEnter) =>
+            new(StateEnterData, data, onStateEnter);
+        /// <summary>
+        /// Creates a hook that gets called when a state is exited by any means (a transition, a global transition, or from Fsm.SetState)
+        /// </summary>
+        /// <param name="data">The data necessary to find the fsm to be edited</param>
+        /// <param name="onStateExit">The action that will be invoked when the state is exited, the parameter passed into the action is the fsm</param>
+        /// <returns>Handle of the hook</returns>
+        public static FSMHookHandle<Action<PlayMakerFSM>> CreateStateExitedHook(FSMData data, Action<PlayMakerFSM> onStateExit) =>
+            new(StateExitData, data, onStateExit);
+        /// <summary>
+        /// Creates a hook that gets called when a state is entered by a transition (could be global or local). The transition from which it happened is passed into the action.
+        /// </summary>
+        /// <param name="data">The data necessary to find the fsm to be edited</param>
+        /// <param name="onStateEnteredFromTransition">The action that will be invoked when the state is entered, the parameter passed into the action is the fsm and the transition from which the state enter happened</param>
+        /// <returns>Handle of the hook</returns>
+        public static FSMHookHandle<Action<PlayMakerFSM, string>> CreateStateEnteredViaTransitionHook(FSMData data, Action<PlayMakerFSM, string> onStateEnteredFromTransition) =>
+            new(StateEnteredFromTransitionData, data, onStateEnteredFromTransition);
+        /// <summary>
+        /// Creates a hook that gets called when a state is exited via a transition (could be global or local). The transition from which it happened is passed into the action.
+        /// </summary>
+        /// <param name="data">The data necessary to find the fsm to be edited</param>
+        /// <param name="onStateExitViaTransition">The action that will be invoked when the state is exited, the parameter passed into the action is the fsm and the transition from which the state exit happened</param>
+        /// <returns>Handle of the hook</returns>
+        public static FSMHookHandle<Action<PlayMakerFSM, string>> CreateStateExitedViaTransitionHook(FSMData data, Action<PlayMakerFSM, string> onStateExitViaTransition) =>
+            new(StateExitedViaTransitionData, data, onStateExitViaTransition);
+
         private static void EnterState(Action<Fsm, FsmState> orig, Fsm self, FsmState state)
         {
             string sceneName = self.GameObject.scene.name;
