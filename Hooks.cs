@@ -204,7 +204,7 @@ namespace Core.FsmUtil
         /// </summary>
         /// <param name="data">The data necessary to find the fsm to be edited</param>
         /// <param name="onStateEnteredFromTransition">The action that will be removed</param>
-        public static void UnHookStateEnteredFromTransitionedFromTransition(FSMData data, Action<PlayMakerFSM, string> onStateEnteredFromTransition)
+        public static void UnHookStateEnteredFromTransition(FSMData data, Action<PlayMakerFSM, string> onStateEnteredFromTransition)
         {
             if (StateEnteredFromTransitionData.ContainsKey(data))
             {
