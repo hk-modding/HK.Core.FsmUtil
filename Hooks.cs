@@ -10,6 +10,9 @@ namespace Core.FsmUtil
 {
     namespace delegates
     {
+        /// <summary>
+        ///     Delegate that receives a PlayMakerFSM.
+        /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public delegate void FsmModificationHandler(PlayMakerFSM fsm);
     }
