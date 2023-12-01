@@ -103,9 +103,9 @@ public static class FsmUtil
     [PublicAPI]
     public static FsmState GetFsmState(this PlayMakerFSM fsm, string stateName)
     {
-        int fsmNameCount = fsmName.Length;
+        int stateNameCount = stateName.Length;
         // length check first because unity's framework472 is trash and doesn't do it itself
-        return GetItemFromArray(fsm.FsmStates, x => x.Name.Length == fsmNameCount && x.Name == stateName);
+        return GetItemFromArray(fsm.FsmStates, x => x.Name.Length == stateNameCount && x.Name == stateName);
     }
 
     /// <summary>
