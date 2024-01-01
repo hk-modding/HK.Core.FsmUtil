@@ -171,7 +171,7 @@ namespace Core.FsmUtil
             }
         }
         /// <summary>
-        /// Hook that gets called when a state is entered by a transition (could be global or local). The transition from which it happened is passed into the action. 
+        /// Hook that gets called when a state is entered by a transition (could be global or local). The transition from which it happened is passed into the action.
         /// </summary>
         /// <param name="data">The data necessary to find the fsm to be edited</param>
         /// <param name="onStateEnteredFromTransition">The action that will be invoked when the state is entered, the parameter passed into the action is the fsm and the transition from which the state enter happened</param>
@@ -260,9 +260,30 @@ namespace Core.FsmUtil
         public static FSMHookHandle<Action<PlayMakerFSM, string>> CreateStateExitedViaTransitionHook(FSMData data, Action<PlayMakerFSM, string> onStateExitViaTransition) =>
             new(StateExitedViaTransitionData, data, onStateExitViaTransition);
 
+        private static string GetSceneName(Fsm self)
+        {
+            if (self == null)
+            {
+                return "";
+            }
+            if (self.Owner == null)
+            {
+                return "";
+            }
+            if (self.Owner.gameObject == null)
+            {
+                return "";
+            }
+            if (self.Owner.gameObject.scene == null)
+            {
+                return "";
+            }
+            return self.Owner.gameObject.scene.name;
+        }
+
         private static void EnterState(Action<Fsm, FsmState> orig, Fsm self, FsmState state)
         {
-            string sceneName = self.GameObject.scene.name;
+            string sceneName = GetSceneName(self);
             string gameObject = self.GameObjectName;
             string fsmName = self.Name;
             string stateName = state.Name;
@@ -279,10 +300,10 @@ namespace Core.FsmUtil
             {
                 onStateEnter_3.TryInvokeActions(self.FsmComponent);
             }
-            
+
             orig(self, state);
         }
-        
+
         private static bool DoTransition(Func<Fsm, FsmTransition, bool, bool> orig, Fsm self, FsmTransition transition, bool isGlobal)
         {
             // a check in the normal code
@@ -290,11 +311,10 @@ namespace Core.FsmUtil
             {
                 return orig(self, transition, isGlobal);
             }
-            
-            string sceneName = self.GameObject.scene.name;
+
+            string sceneName = GetSceneName(self);
             string gameObject = self.GameObjectName;
             string fsmName = self.Name;
-
 
             if (StateExitedViaTransitionData.TryGetValue(new FSMData(sceneName, gameObject, fsmName, self.ActiveStateName), out var onStateExitedViaTransition_1))
             {
@@ -308,8 +328,7 @@ namespace Core.FsmUtil
             {
                 onStateExitedViaTransition_3.TryInvokeActions(self.FsmComponent, transition.EventName);
             }
-            
-            
+
             if (StateEnteredFromTransitionData.TryGetValue(new FSMData(sceneName, gameObject, fsmName, transition.ToState), out var onStateEnteredFromTransition_1))
             {
                 onStateEnteredFromTransition_1.TryInvokeActions(self.FsmComponent, transition.EventName);
@@ -322,14 +341,13 @@ namespace Core.FsmUtil
             {
                 onStateEnteredFromTransition_3.TryInvokeActions(self.FsmComponent, transition.EventName);
             }
-            
-            
+
             return orig(self, transition, isGlobal);
         }
-        
+
         private static void ExitState(Action<Fsm, FsmState> orig, Fsm self, FsmState state)
         {
-            string sceneName = self.GameObject.scene.name;
+            string sceneName = GetSceneName(self);
             string gameObject = self.GameObjectName;
             string fsmName = self.Name;
             string stateName = state.Name;
@@ -346,7 +364,7 @@ namespace Core.FsmUtil
             {
                 onStateExit_3.TryInvokeActions(self.FsmComponent);
             }
-            
+
             orig(self, state);
         }
 
@@ -368,7 +386,7 @@ namespace Core.FsmUtil
                 }
             }
         }
-        
+
         private static void TryInvokeActions(this Action<PlayMakerFSM, string> action, PlayMakerFSM fsm, string transition)
         {
             if (action != null)
