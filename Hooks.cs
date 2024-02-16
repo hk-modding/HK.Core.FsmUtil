@@ -262,23 +262,7 @@ namespace Core.FsmUtil
 
         private static string GetSceneName(Fsm self)
         {
-            if (self == null)
-            {
-                return "";
-            }
-            if (self.Owner == null)
-            {
-                return "";
-            }
-            if (self.Owner.gameObject == null)
-            {
-                return "";
-            }
-            if (self.Owner.gameObject.scene == null)
-            {
-                return "";
-            }
-            return self.Owner.gameObject.scene.name;
+            return GameManager.instance.GetSceneNameString();
         }
 
         private static void EnterState(Action<Fsm, FsmState> orig, Fsm self, FsmState state)
