@@ -1,89 +1,38 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
+    <Product>Core_FsmUtil</Product>
     <RootNamespace>Core.FsmUtil</RootNamespace>
     <AssemblyName>Core_FsmUtil</AssemblyName>
     <AssemblyTitle>Core_FsmUtil</AssemblyTitle>
-    <Product>Core_FsmUtil</Product>
     <Description>A Hollow Knight Mod</Description>
     <Copyright>Copyright © HK Modding 2023</Copyright>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
-    <OutputPath>bin\$(Configuration)\</OutputPath>
+    <AssemblyVersion>1.1.1.1</AssemblyVersion>
+    <FileVersion>$(AssemblyVersion)</FileVersion>
+    <ImplicitUsings>false</ImplicitUsings>
+    <DisableImplicitFrameworkReferences>true</DisableImplicitFrameworkReferences>
+    <OutputPath>bin/$(Configuration)/</OutputPath>
     <LangVersion>latest</LangVersion>
-    <NoWarn>8002</NoWarn>
     <PathMap>$(MSBuildProjectDirectory)=source</PathMap>
-    <HollowKnightRefs Condition="'$(HollowKnightRefs)' == '' and Exists('E:/GOG/Hollow Knight 1.5 Modded/Hollow Knight_Data/Managed/')">E:/GOG/Hollow Knight 1.5 Modded/Hollow Knight_Data/Managed/</HollowKnightRefs>
-    <HollowKnightRefs Condition="'$(HollowKnightRefs)' == '' and Exists('C:\Program Files (x86)\Steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed\')">C:\Program Files (x86)\Steam\steamapps\common\Hollow Knight\hollow_knight_Data\Managed\</HollowKnightRefs>
-    <ExportDir Condition="'$(ExportDir)' == '' and Exists('E:/Documents/Projects/__Exports_Core/')">E:/Documents/Projects/__Exports_Core/</ExportDir>
-    <ExportDir Condition="'$(ExportDir)' == '' and Exists('Output\')">Output\</ExportDir>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <AssemblyOriginatorKeyFile>../sgKey.snk</AssemblyOriginatorKeyFile>
+    <HollowKnightRefs />
+    <ExportDir />
+    <DocumentationFile>$(OutputPath)/$(AssemblyTitle).xml</DocumentationFile>
   </PropertyGroup>
-  <Target Name="CopyMod" AfterTargets="PostBuildEvent">
-    <RemoveDir Directories="$(ExportDir)/$(TargetName)/" />
-    <MakeDir Directories="$(ExportDir)/$(TargetName)/" />
-    <MakeDir Directories="$(ExportDir)/$(TargetName)/zip/" />
-    <MakeDir Condition="!Exists('$(HollowKnightRefs)/Mods/$(TargetName)/')" Directories="$(HollowKnightRefs)/Mods/$(TargetName)/" />
-    <Copy SourceFiles="$(TargetPath);$(TargetDir)/$(TargetName).pdb;$(TargetDir)/$(TargetName).xml" DestinationFolder="$(HollowKnightRefs)/Mods/$(TargetName)/" />
-    <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(ExportDir)/$(TargetName)/" />
-    <Copy SourceFiles="ReadMe.md;$(TargetPath);$(TargetDir)/$(TargetName).pdb;$(TargetDir)/$(TargetName).xml" DestinationFolder="$(ExportDir)/$(TargetName)/zip/" />
-    <ZipDirectory SourceDirectory="$(ExportDir)/$(TargetName)/zip/" DestinationFile="$(ExportDir)/$(TargetName)/$(TargetName).zip" />
-    <RemoveDir Directories="$(ExportDir)/$(TargetName)/zip/" />
-
-    <PropertyGroup>
-      <OutputFileString>SHA256 - $(AssemblyTitle).dll, Version $(AssemblyVersion):</OutputFileString>
-    </PropertyGroup>
-    <GetFileHash Files="$(ExportDir)/$(TargetName)/$(TargetName).dll" Algorithm="SHA256">
-      <Output TaskParameter="Items" ItemName="FilesWithHashes" />
-    </GetFileHash>
-    <PropertyGroup>
-      <OutputZipString>SHA256 - $(AssemblyTitle).zip:</OutputZipString>
-    </PropertyGroup>
-    <GetFileHash Files="$(ExportDir)/$(TargetName)/$(TargetName).zip" Algorithm="SHA256">
-      <Output TaskParameter="Items" ItemName="ZipFilesWithHashes" />
-    </GetFileHash>
-    <WriteLinesToFile File="$(ExportDir)/$(TargetName)/SHA.txt" Lines="$(OutputFileString);@(FilesWithHashes->'%(FileHash)');$(OutputZipString);@(ZipFilesWithHashes->'%(FileHash)')" Overwrite="true" Encoding="UTF-8" />
-  </Target>
+  <Import Project="LocalOverrides.targets" Condition="Exists('LocalOverrides.targets')" />
+  <Import Project="build_steps.targets" />
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' AND Exists('$(AssemblyOriginatorKeyFile)') ">
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>$(HollowKnightRefs)/Assembly-CSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="MMHOOK_PlayMaker">
-      <HintPath>$(HollowKnightRefs)/MMHOOK_PlayMaker.dll</HintPath>
-    </Reference>
-    <Reference Include="netstandard">
-      <HintPath>$(HollowKnightRefs)/netstandard.dll</HintPath>
-    </Reference>
-    <Reference Include="PlayMaker">
-      <HintPath>$(HollowKnightRefs)/PlayMaker.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Diagnostics.StackTrace">
-      <HintPath>$(HollowKnightRefs)/System.Diagnostics.StackTrace.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Globalization.Extensions">
-      <HintPath>$(HollowKnightRefs)/System.Globalization.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.IO.Compression">
-      <HintPath>$(HollowKnightRefs)/System.IO.Compression.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http">
-      <HintPath>$(HollowKnightRefs)/System.Net.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.Serialization.Xml">
-      <HintPath>$(HollowKnightRefs)/System.Runtime.Serialization.Xml.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine">
-      <HintPath>$(HollowKnightRefs)/UnityEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>$(HollowKnightRefs)/UnityEngine.CoreModule.dll</HintPath>
-    </Reference>
-    <Reference Include="MonoMod.RuntimeDetour">
-      <HintPath>$(HollowKnightRefs)/MonoMod.RuntimeDetour.dll</HintPath>
-    </Reference>
+    <Reference Include="$(HollowKnightRefs)/*.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Resources" />
+    <Folder Include="src" />
+    <Folder Include="test" />
     <None Include=".gitignore" />
-    <None Include="ReadMe.md" />
+    <None Include="LICENSE" />
+    <None Include="README.md" />
   </ItemGroup>
 </Project>
