@@ -246,7 +246,10 @@ public static class FsmUtil
     [PublicAPI]
     public static FsmState CopyFsmState(this PlayMakerFSM fsm, string fromState, string toState)
     {
-        FsmState copy = new FsmState(fsm.GetFsmState(fromState))
+        FsmState from = fsm.GetFsmState(fromState);
+        // save the actions before we create a new state from this, as the copy constructor will create the new actions from the saved action data from the state we put in, and that is only updated if we call .SaveActions()
+        from.SaveActions();
+        FsmState copy = new FsmState(from)
         {
             Name = toState
         };
