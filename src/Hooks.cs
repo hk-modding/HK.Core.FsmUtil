@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
+using System.Text.RegularExpressions;
 using Core.FsmUtil.delegates;
 using HutongGames.PlayMaker;
 using MonoMod.RuntimeDetour;
@@ -262,7 +263,11 @@ namespace Core.FsmUtil
 
         private static string GetSceneName(Fsm self)
         {
-            return GameManager.instance.GetSceneNameString();
+            string tmpSceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            tmpSceneName = Regex.Replace(tmpSceneName, "_boss_defeated$", "");
+            tmpSceneName = Regex.Replace(tmpSceneName, "_boss$", "");
+            tmpSceneName = Regex.Replace(tmpSceneName, "_preload$", "");
+            return tmpSceneName;
         }
 
         private static void EnterState(Action<Fsm, FsmState> orig, Fsm self, FsmState state)
