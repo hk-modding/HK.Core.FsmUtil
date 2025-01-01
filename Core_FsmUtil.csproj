@@ -6,7 +6,7 @@
     <AssemblyName>Core_FsmUtil</AssemblyName>
     <AssemblyTitle>Core_FsmUtil</AssemblyTitle>
     <Description>A Hollow Knight Mod</Description>
-    <Copyright>Copyright © HK Modding 2023</Copyright>
+    <Copyright>Copyright © HK Modding 2025</Copyright>
     <AssemblyVersion>1.1.2.0</AssemblyVersion>
     <FileVersion>$(AssemblyVersion)</FileVersion>
     <ImplicitUsings>false</ImplicitUsings>
