@@ -33,8 +33,15 @@ namespace Core.FsmUtil.Actions
         /// </summary>
         public override void OnEnter()
         {
-            Method?.Invoke(Arg);
-            Finish();
+            if (Method != null && Arg != null)
+            {
+                Method.Invoke(Arg);
+            }
+
+            if ((!(Arg is Action tmpAction)) || (tmpAction != Finish))
+            {
+                Finish();
+            }
         }
     }
 }
