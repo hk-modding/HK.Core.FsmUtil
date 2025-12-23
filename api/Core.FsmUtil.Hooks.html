@@ -1,0 +1,703 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class Hooks </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class Hooks ">
+      
+      <meta name="description" content="Class that handles special FSM hooks.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/hk-modding/HK.Core.FsmUtil/new/master/apiSpec/new?filename=Core_FsmUtil_Hooks.md&amp;value=---%0Auid%3A%20Core.FsmUtil.Hooks%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="">
+            
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled="" placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="Core.FsmUtil.Hooks">
+
+
+
+  <h1 id="Core_FsmUtil_Hooks" data-uid="Core.FsmUtil.Hooks" class="text-break">
+Class Hooks  <a class="header-action link-secondary" title="View source" href="https://github.com/hk-modding/HK.Core.FsmUtil/blob/master/src/Hooks.cs/#L24"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="Core.html">Core</a>.<a class="xref" href="Core.FsmUtil.html">FsmUtil</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>Core_FsmUtil.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Class that handles special FSM hooks.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class Hooks</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">Hooks</span></div>
+    </dd>
+  </dl>
+
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="Core_FsmUtil_Hooks_CreateStateEnteredHook_" data-uid="Core.FsmUtil.Hooks.CreateStateEnteredHook*"></a>
+
+  <h3 id="Core_FsmUtil_Hooks_CreateStateEnteredHook_Core_FsmUtil_FSMData_System_Action_PlayMakerFSM__" data-uid="Core.FsmUtil.Hooks.CreateStateEnteredHook(Core.FsmUtil.FSMData,System.Action{PlayMakerFSM})">
+  CreateStateEnteredHook(FSMData, Action&lt;PlayMakerFSM&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/hk-modding/HK.Core.FsmUtil/blob/master/src/Hooks.cs/#L237"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a hook that gets called when a state is entered by any means (a transition, a global transition, or from Fsm.SetState)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FSMHookHandle&lt;Action&lt;PlayMakerFSM&gt;&gt; CreateStateEnteredHook(FSMData data, Action&lt;PlayMakerFSM&gt; onStateEnter)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>data</code> <a class="xref" href="Core.FsmUtil.FSMData.html">FSMData</a></dt>
+    <dd><p>The data necessary to find the fsm to be edited</p>
+</dd>
+    <dt><code>onStateEnter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<span class="xref">PlayMakerFSM</span>&gt;</dt>
+    <dd><p>The action that will be invoked when the state is entered, the parameter passed into the action is the fsm</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Core.FsmUtil.FSMHookHandle-1.html">FSMHookHandle</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<span class="xref">PlayMakerFSM</span>&gt;&gt;</dt>
+    <dd><p>Handle of the hook</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Core_FsmUtil_Hooks_CreateStateEnteredViaTransitionHook_" data-uid="Core.FsmUtil.Hooks.CreateStateEnteredViaTransitionHook*"></a>
+
+  <h3 id="Core_FsmUtil_Hooks_CreateStateEnteredViaTransitionHook_Core_FsmUtil_FSMData_System_Action_PlayMakerFSM_System_String__" data-uid="Core.FsmUtil.Hooks.CreateStateEnteredViaTransitionHook(Core.FsmUtil.FSMData,System.Action{PlayMakerFSM,System.String})">
+  CreateStateEnteredViaTransitionHook(FSMData, Action&lt;PlayMakerFSM, string&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/hk-modding/HK.Core.FsmUtil/blob/master/src/Hooks.cs/#L253"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a hook that gets called when a state is entered by a transition (could be global or local). The transition from which it happened is passed into the action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FSMHookHandle&lt;Action&lt;PlayMakerFSM, string&gt;&gt; CreateStateEnteredViaTransitionHook(FSMData data, Action&lt;PlayMakerFSM, string&gt; onStateEnteredFromTransition)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>data</code> <a class="xref" href="Core.FsmUtil.FSMData.html">FSMData</a></dt>
+    <dd><p>The data necessary to find the fsm to be edited</p>
+</dd>
+    <dt><code>onStateEnteredFromTransition</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-2">Action</a>&lt;<span class="xref">PlayMakerFSM</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd><p>The action that will be invoked when the state is entered, the parameter passed into the action is the fsm and the transition from which the state enter happened</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Core.FsmUtil.FSMHookHandle-1.html">FSMHookHandle</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-2">Action</a>&lt;<span class="xref">PlayMakerFSM</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
+    <dd><p>Handle of the hook</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Core_FsmUtil_Hooks_CreateStateExitedHook_" data-uid="Core.FsmUtil.Hooks.CreateStateExitedHook*"></a>
+
+  <h3 id="Core_FsmUtil_Hooks_CreateStateExitedHook_Core_FsmUtil_FSMData_System_Action_PlayMakerFSM__" data-uid="Core.FsmUtil.Hooks.CreateStateExitedHook(Core.FsmUtil.FSMData,System.Action{PlayMakerFSM})">
+  CreateStateExitedHook(FSMData, Action&lt;PlayMakerFSM&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/hk-modding/HK.Core.FsmUtil/blob/master/src/Hooks.cs/#L245"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a hook that gets called when a state is exited by any means (a transition, a global transition, or from Fsm.SetState)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FSMHookHandle&lt;Action&lt;PlayMakerFSM&gt;&gt; CreateStateExitedHook(FSMData data, Action&lt;PlayMakerFSM&gt; onStateExit)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>data</code> <a class="xref" href="Core.FsmUtil.FSMData.html">FSMData</a></dt>
+    <dd><p>The data necessary to find the fsm to be edited</p>
+</dd>
+    <dt><code>onStateExit</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<span class="xref">PlayMakerFSM</span>&gt;</dt>
+    <dd><p>The action that will be invoked when the state is exited, the parameter passed into the action is the fsm</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Core.FsmUtil.FSMHookHandle-1.html">FSMHookHandle</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<span class="xref">PlayMakerFSM</span>&gt;&gt;</dt>
+    <dd><p>Handle of the hook</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Core_FsmUtil_Hooks_CreateStateExitedViaTransitionHook_" data-uid="Core.FsmUtil.Hooks.CreateStateExitedViaTransitionHook*"></a>
+
+  <h3 id="Core_FsmUtil_Hooks_CreateStateExitedViaTransitionHook_Core_FsmUtil_FSMData_System_Action_PlayMakerFSM_System_String__" data-uid="Core.FsmUtil.Hooks.CreateStateExitedViaTransitionHook(Core.FsmUtil.FSMData,System.Action{PlayMakerFSM,System.String})">
+  CreateStateExitedViaTransitionHook(FSMData, Action&lt;PlayMakerFSM, string&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/hk-modding/HK.Core.FsmUtil/blob/master/src/Hooks.cs/#L261"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Creates a hook that gets called when a state is exited via a transition (could be global or local). The transition from which it happened is passed into the action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static FSMHookHandle&lt;Action&lt;PlayMakerFSM, string&gt;&gt; CreateStateExitedViaTransitionHook(FSMData data, Action&lt;PlayMakerFSM, string&gt; onStateExitViaTransition)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>data</code> <a class="xref" href="Core.FsmUtil.FSMData.html">FSMData</a></dt>
+    <dd><p>The data necessary to find the fsm to be edited</p>
+</dd>
+    <dt><code>onStateExitViaTransition</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-2">Action</a>&lt;<span class="xref">PlayMakerFSM</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd><p>The action that will be invoked when the state is exited, the parameter passed into the action is the fsm and the transition from which the state exit happened</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Core.FsmUtil.FSMHookHandle-1.html">FSMHookHandle</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-2">Action</a>&lt;<span class="xref">PlayMakerFSM</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;&gt;</dt>
+    <dd><p>Handle of the hook</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Core_FsmUtil_Hooks_HookStateEntered_" data-uid="Core.FsmUtil.Hooks.HookStateEntered*"></a>
+
+  <h3 id="Core_FsmUtil_Hooks_HookStateEntered_Core_FsmUtil_FSMData_System_Action_PlayMakerFSM__" data-uid="Core.FsmUtil.Hooks.HookStateEntered(Core.FsmUtil.FSMData,System.Action{PlayMakerFSM})">
+  HookStateEntered(FSMData, Action&lt;PlayMakerFSM&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/hk-modding/HK.Core.FsmUtil/blob/master/src/Hooks.cs/#L123"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Hook that gets called when a state is entered by any means (a transition, a global transition, or from Fsm.SetState)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void HookStateEntered(FSMData data, Action&lt;PlayMakerFSM&gt; onStateEnter)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>data</code> <a class="xref" href="Core.FsmUtil.FSMData.html">FSMData</a></dt>
+    <dd><p>The data necessary to find the fsm to be edited</p>
+</dd>
+    <dt><code>onStateEnter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<span class="xref">PlayMakerFSM</span>&gt;</dt>
+    <dd><p>The action that will be invoked when the state is entered, the parameter passed into the action is the fsm</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Core_FsmUtil_Hooks_HookStateEnteredFromTransition_" data-uid="Core.FsmUtil.Hooks.HookStateEnteredFromTransition*"></a>
+
+  <h3 id="Core_FsmUtil_Hooks_HookStateEnteredFromTransition_Core_FsmUtil_FSMData_System_Action_PlayMakerFSM_System_String__" data-uid="Core.FsmUtil.Hooks.HookStateEnteredFromTransition(Core.FsmUtil.FSMData,System.Action{PlayMakerFSM,System.String})">
+  HookStateEnteredFromTransition(FSMData, Action&lt;PlayMakerFSM, string&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/hk-modding/HK.Core.FsmUtil/blob/master/src/Hooks.cs/#L179"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Hook that gets called when a state is entered by a transition (could be global or local). The transition from which it happened is passed into the action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void HookStateEnteredFromTransition(FSMData data, Action&lt;PlayMakerFSM, string&gt; onStateEnteredFromTransition)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>data</code> <a class="xref" href="Core.FsmUtil.FSMData.html">FSMData</a></dt>
+    <dd><p>The data necessary to find the fsm to be edited</p>
+</dd>
+    <dt><code>onStateEnteredFromTransition</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-2">Action</a>&lt;<span class="xref">PlayMakerFSM</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd><p>The action that will be invoked when the state is entered, the parameter passed into the action is the fsm and the transition from which the state enter happened</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Core_FsmUtil_Hooks_HookStateExited_" data-uid="Core.FsmUtil.Hooks.HookStateExited*"></a>
+
+  <h3 id="Core_FsmUtil_Hooks_HookStateExited_Core_FsmUtil_FSMData_System_Action_PlayMakerFSM__" data-uid="Core.FsmUtil.Hooks.HookStateExited(Core.FsmUtil.FSMData,System.Action{PlayMakerFSM})">
+  HookStateExited(FSMData, Action&lt;PlayMakerFSM&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/hk-modding/HK.Core.FsmUtil/blob/master/src/Hooks.cs/#L139"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Hook that gets called when a state is exited by any means (a transition, a global transition, or from Fsm.SetState)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void HookStateExited(FSMData data, Action&lt;PlayMakerFSM&gt; onStateExit)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>data</code> <a class="xref" href="Core.FsmUtil.FSMData.html">FSMData</a></dt>
+    <dd><p>The data necessary to find the fsm to be edited</p>
+</dd>
+    <dt><code>onStateExit</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<span class="xref">PlayMakerFSM</span>&gt;</dt>
+    <dd><p>The action that will be invoked when the state is exited, the parameter passed into the action is the fsm</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Core_FsmUtil_Hooks_HookStateExitedViaTransition_" data-uid="Core.FsmUtil.Hooks.HookStateExitedViaTransition*"></a>
+
+  <h3 id="Core_FsmUtil_Hooks_HookStateExitedViaTransition_Core_FsmUtil_FSMData_System_Action_PlayMakerFSM_System_String__" data-uid="Core.FsmUtil.Hooks.HookStateExitedViaTransition(Core.FsmUtil.FSMData,System.Action{PlayMakerFSM,System.String})">
+  HookStateExitedViaTransition(FSMData, Action&lt;PlayMakerFSM, string&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/hk-modding/HK.Core.FsmUtil/blob/master/src/Hooks.cs/#L195"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Hook that gets called when a state is exited via a transition (could be global or local). The transition from which it happened is passed into the action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void HookStateExitedViaTransition(FSMData data, Action&lt;PlayMakerFSM, string&gt; onStateExitViaTransition)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>data</code> <a class="xref" href="Core.FsmUtil.FSMData.html">FSMData</a></dt>
+    <dd><p>The data necessary to find the fsm to be edited</p>
+</dd>
+    <dt><code>onStateExitViaTransition</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-2">Action</a>&lt;<span class="xref">PlayMakerFSM</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd><p>The action that will be invoked when the state is exited, the parameter passed into the action is the fsm and the transition from which the state exit happened</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Core_FsmUtil_Hooks_UnHookStateEntered_" data-uid="Core.FsmUtil.Hooks.UnHookStateEntered*"></a>
+
+  <h3 id="Core_FsmUtil_Hooks_UnHookStateEntered_Core_FsmUtil_FSMData_System_Action_PlayMakerFSM__" data-uid="Core.FsmUtil.Hooks.UnHookStateEntered(Core.FsmUtil.FSMData,System.Action{PlayMakerFSM})">
+  UnHookStateEntered(FSMData, Action&lt;PlayMakerFSM&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/hk-modding/HK.Core.FsmUtil/blob/master/src/Hooks.cs/#L155"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Unhook your action from the hook that gets called when a state is entered by any means (a transition, a global transition, or from Fsm.SetState)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void UnHookStateEntered(FSMData data, Action&lt;PlayMakerFSM&gt; onStateEnter)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>data</code> <a class="xref" href="Core.FsmUtil.FSMData.html">FSMData</a></dt>
+    <dd><p>The data necessary to find the fsm to be edited</p>
+</dd>
+    <dt><code>onStateEnter</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<span class="xref">PlayMakerFSM</span>&gt;</dt>
+    <dd><p>The action that will be removed</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Core_FsmUtil_Hooks_UnHookStateEnteredFromTransition_" data-uid="Core.FsmUtil.Hooks.UnHookStateEnteredFromTransition*"></a>
+
+  <h3 id="Core_FsmUtil_Hooks_UnHookStateEnteredFromTransition_Core_FsmUtil_FSMData_System_Action_PlayMakerFSM_System_String__" data-uid="Core.FsmUtil.Hooks.UnHookStateEnteredFromTransition(Core.FsmUtil.FSMData,System.Action{PlayMakerFSM,System.String})">
+  UnHookStateEnteredFromTransition(FSMData, Action&lt;PlayMakerFSM, string&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/hk-modding/HK.Core.FsmUtil/blob/master/src/Hooks.cs/#L211"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Unhook your action from the hook that gets called when a state is entered by a transition (could be global or local)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void UnHookStateEnteredFromTransition(FSMData data, Action&lt;PlayMakerFSM, string&gt; onStateEnteredFromTransition)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>data</code> <a class="xref" href="Core.FsmUtil.FSMData.html">FSMData</a></dt>
+    <dd><p>The data necessary to find the fsm to be edited</p>
+</dd>
+    <dt><code>onStateEnteredFromTransition</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-2">Action</a>&lt;<span class="xref">PlayMakerFSM</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd><p>The action that will be removed</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Core_FsmUtil_Hooks_UnHookStateExited_" data-uid="Core.FsmUtil.Hooks.UnHookStateExited*"></a>
+
+  <h3 id="Core_FsmUtil_Hooks_UnHookStateExited_Core_FsmUtil_FSMData_System_Action_PlayMakerFSM__" data-uid="Core.FsmUtil.Hooks.UnHookStateExited(Core.FsmUtil.FSMData,System.Action{PlayMakerFSM})">
+  UnHookStateExited(FSMData, Action&lt;PlayMakerFSM&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/hk-modding/HK.Core.FsmUtil/blob/master/src/Hooks.cs/#L167"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Unhook your action from the hook that gets called when a state is exited by any means (a transition, a global transition, or from Fsm.SetState)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void UnHookStateExited(FSMData data, Action&lt;PlayMakerFSM&gt; onStateExit)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>data</code> <a class="xref" href="Core.FsmUtil.FSMData.html">FSMData</a></dt>
+    <dd><p>The data necessary to find the fsm to be edited</p>
+</dd>
+    <dt><code>onStateExit</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<span class="xref">PlayMakerFSM</span>&gt;</dt>
+    <dd><p>The action that will be removed</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a id="Core_FsmUtil_Hooks_UnHookStateExitedViaTransition_" data-uid="Core.FsmUtil.Hooks.UnHookStateExitedViaTransition*"></a>
+
+  <h3 id="Core_FsmUtil_Hooks_UnHookStateExitedViaTransition_Core_FsmUtil_FSMData_System_Action_PlayMakerFSM_System_String__" data-uid="Core.FsmUtil.Hooks.UnHookStateExitedViaTransition(Core.FsmUtil.FSMData,System.Action{PlayMakerFSM,System.String})">
+  UnHookStateExitedViaTransition(FSMData, Action&lt;PlayMakerFSM, string&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/hk-modding/HK.Core.FsmUtil/blob/master/src/Hooks.cs/#L223"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Unhook your action from the hook that gets called when a state is exited via a transition (could be global or local)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void UnHookStateExitedViaTransition(FSMData data, Action&lt;PlayMakerFSM, string&gt; onStateExitViaTransition)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>data</code> <a class="xref" href="Core.FsmUtil.FSMData.html">FSMData</a></dt>
+    <dd><p>The data necessary to find the fsm to be edited</p>
+</dd>
+    <dt><code>onStateExitViaTransition</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.action-2">Action</a>&lt;<span class="xref">PlayMakerFSM</span>, <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a>&gt;</dt>
+    <dd><p>The action that will be removed</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="events">Events
+</h2>
+
+
+
+  <h3 id="Core_FsmUtil_Hooks_PmFsmAfterOnEnableHook" data-uid="Core.FsmUtil.Hooks.PmFsmAfterOnEnableHook">
+  PmFsmAfterOnEnableHook
+  <a class="header-action link-secondary" title="View source" href="https://github.com/hk-modding/HK.Core.FsmUtil/blob/master/src/Hooks.cs/#L71"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Hook that gets called after <code>PlayMakerFSM.OnEnable()</code> is called.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static event FsmModificationHandler PmFsmAfterOnEnableHook</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">Event Type</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Core.FsmUtil.delegates.FsmModificationHandler.html">FsmModificationHandler</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+  <h3 id="Core_FsmUtil_Hooks_PmFsmBeforeStartHook" data-uid="Core.FsmUtil.Hooks.PmFsmBeforeStartHook">
+  PmFsmBeforeStartHook
+  <a class="header-action link-secondary" title="View source" href="https://github.com/hk-modding/HK.Core.FsmUtil/blob/master/src/Hooks.cs/#L42"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Hook that gets called before <code>PlayMakerFSM.Start()</code> is called.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static event FsmModificationHandler PmFsmBeforeStartHook</code></pre>
+  </div>
+
+
+
+
+
+
+  <h4 class="section">Event Type</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="Core.FsmUtil.delegates.FsmModificationHandler.html">FsmModificationHandler</a></dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/hk-modding/HK.Core.FsmUtil/blob/master/src/Hooks.cs/#L24" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

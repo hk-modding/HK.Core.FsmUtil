@@ -1,0 +1,168 @@
+{
+  "source_base_path": "/github/workspace/master/docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core.FsmUtil.Actions.FunctionAction-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core.FsmUtil.Actions.FunctionAction-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core.FsmUtil.Actions.LogAction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core.FsmUtil.Actions.LogAction.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core.FsmUtil.Actions.MethodAction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core.FsmUtil.Actions.MethodAction.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core.FsmUtil.Actions.SimpleLogAction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core.FsmUtil.Actions.SimpleLogAction.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core.FsmUtil.Actions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core.FsmUtil.Actions.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core.FsmUtil.FSMData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core.FsmUtil.FSMData.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core.FsmUtil.FSMHookHandle-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core.FsmUtil.FSMHookHandle-1.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core.FsmUtil.FsmUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core.FsmUtil.FsmUtil.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core.FsmUtil.Hooks.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core.FsmUtil.Hooks.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core.FsmUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core.FsmUtil.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "articles/toc.html"
+        },
+        ".json": {
+          "relative_path": "articles/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
