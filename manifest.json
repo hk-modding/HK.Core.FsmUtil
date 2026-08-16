@@ -1,0 +1,208 @@
+{
+  "source_base_path": "/github/workspace/master/docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core.FsmUtil.Actions.FunctionAction-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core.FsmUtil.Actions.FunctionAction-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Core.FsmUtil.Actions.FunctionAction<TArg>",
+      "Summary": "<p sourcefile=\"api/Core.FsmUtil.Actions.FunctionAction-1.yml\" sourcestartlinenumber=\"1\">FsmStateAction that invokes methods with an argument.\nYou will likely use this with a <code sourcefile=\"api/Core.FsmUtil.Actions.FunctionAction-1.yml\" sourcestartlinenumber=\"2\">HutongGames.PlayMaker.NamedVariable</code> as the generic argument</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core.FsmUtil.Actions.LogAction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core.FsmUtil.Actions.LogAction.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Core.FsmUtil.Actions.LogAction",
+      "Summary": "<p sourcefile=\"api/Core.FsmUtil.Actions.LogAction.yml\" sourcestartlinenumber=\"1\">FsmStateAction that logs the value of an FsmString and gives context of which GameObject with which Fsm in which State produces the log.\nOutput:\n<code sourcefile=\"api/Core.FsmUtil.Actions.LogAction.yml\" sourcestartlinenumber=\"3\">[{GameObject path}]:[{FSM name}]:[{FSM State name}] - {message}</code></p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core.FsmUtil.Actions.MethodAction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core.FsmUtil.Actions.MethodAction.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Core.FsmUtil.Actions.MethodAction",
+      "Summary": "<p sourcefile=\"api/Core.FsmUtil.Actions.MethodAction.yml\" sourcestartlinenumber=\"1\">FsmStateAction that invokes methods.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core.FsmUtil.Actions.SimpleLogAction.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core.FsmUtil.Actions.SimpleLogAction.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Core.FsmUtil.Actions.SimpleLogAction",
+      "Summary": "<p sourcefile=\"api/Core.FsmUtil.Actions.SimpleLogAction.yml\" sourcestartlinenumber=\"1\">FsmStateAction that logs the value of an FsmString.\nOutput:\n<code sourcefile=\"api/Core.FsmUtil.Actions.SimpleLogAction.yml\" sourcestartlinenumber=\"3\">[Core]:[FsmUtil]:[LogAction] - {message}</code></p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core.FsmUtil.Actions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core.FsmUtil.Actions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Core.FsmUtil.Actions",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core.FsmUtil.FSMData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core.FsmUtil.FSMData.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Core.FsmUtil.FSMData",
+      "Summary": "<p sourcefile=\"api/Core.FsmUtil.FSMData.yml\" sourcestartlinenumber=\"1\">Provides data necessary to find the FSM you want to edit. Use this overload when you want to edit and fsm on a gameObject only in a specific scene</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core.FsmUtil.FSMHookHandle-1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core.FsmUtil.FSMHookHandle-1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Core.FsmUtil.FSMHookHandle<T>",
+      "Summary": "<p sourcefile=\"api/Core.FsmUtil.FSMHookHandle-1.yml\" sourcestartlinenumber=\"1\">Handle for FSM Hooks, created via <xref href=\"Core.FsmUtil.Hooks\" data-throw-if-not-resolved=\"false\"></xref>.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core.FsmUtil.FsmUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core.FsmUtil.FsmUtil.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Core.FsmUtil.FsmUtil",
+      "Summary": "<p sourcefile=\"api/Core.FsmUtil.FsmUtil.yml\" sourcestartlinenumber=\"1\">Utils specifically for PlayMakerFSMs.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core.FsmUtil.Hooks.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core.FsmUtil.Hooks.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Core.FsmUtil.Hooks",
+      "Summary": "<p sourcefile=\"api/Core.FsmUtil.Hooks.yml\" sourcestartlinenumber=\"1\">Class that handles special FSM hooks.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/Core.FsmUtil.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Core.FsmUtil.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "Core.FsmUtil",
+      "Summary": null
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".json": {
+          "relative_path": "api/toc.json"
+        },
+        ".html": {
+          "relative_path": "api/toc.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "articles/toc.yml",
+      "output": {
+        ".json": {
+          "relative_path": "articles/toc.json"
+        },
+        ".html": {
+          "relative_path": "articles/toc.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".json": {
+          "relative_path": "toc.json"
+        },
+        ".html": {
+          "relative_path": "toc.html"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
